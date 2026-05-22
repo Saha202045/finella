@@ -1,3 +1,6 @@
+bash
+
+cat > /mnt/user-data/outputs/index.html << 'HTMLEOF'
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,146 +8,131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Finella 💖</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#FF1F6E">
+  <meta name="theme-color" content="#E0176C">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Finella">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --rose:#FF1F6E; --rose-light:#FFE0EC; --rose-glow:rgba(255,31,110,.3);
-      --violet:#9B5DE5; --violet-light:#F0E8FF;
-      --peach:#FF8C6B; --peach-light:#FFEDE7;
-      --mint:#00D9A6; --mint-light:#CCFAF2;
-      --gold:#F5A623; --gold-light:#FEF3DC;
-      --sky:#4FACFE; --sky-light:#DDEFFF;
-      --bg:#FEF0F6; --surface:#FFFFFF;
-      --text:#1A0A2E; --muted:#9A7AB8; --light:#C4B0D8;
-      --border:rgba(155,93,229,.12);
-      --hero:linear-gradient(135deg,#FF1F6E 0%,#9B5DE5 60%,#FF8C6B 100%);
-      --hero2:linear-gradient(135deg,#00D9A6 0%,#4FACFE 100%);
-      --hero3:linear-gradient(135deg,#F5A623 0%,#FF8C6B 100%);
+      --rose:#E0176C; --rose2:#FF5BA3; --rose-light:#FFE8F3; --rose-glow:rgba(224,23,108,.28);
+      --violet:#8B47E8; --violet-light:#EEE4FF;
+      --peach:#FF7D5C; --peach-light:#FFEDE7;
+      --mint:#00CFA8; --mint-light:#CDFCF3;
+      --gold:#F0A500; --gold-light:#FEF5D9;
+      --sky:#4FACFE; --sky-light:#E0F2FF;
+      --bg:#FFF2F8; --surface:#FFFFFF;
+      --text:#1C0A28; --muted:#9474B4; --light:#C4A8D8;
+      --border:rgba(139,71,232,.11);
+      --hero:linear-gradient(135deg,#E0176C 0%,#8B47E8 55%,#FF7D5C 100%);
+      --hero2:linear-gradient(135deg,#00CFA8 0%,#4FACFE 100%);
+      --hero3:linear-gradient(135deg,#F0A500 0%,#FF7D5C 100%);
+      --hero4:linear-gradient(135deg,#8B47E8 0%,#E0176C 100%);
+      --sidebar:#160828;
       --safe-top:env(safe-area-inset-top,0px);
       --safe-bottom:env(safe-area-inset-bottom,0px);
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html,body,#root{height:100%;overflow:hidden}
-    body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overscroll-behavior:none}
-    h1,h2,.display{font-family:'Playfair Display',Georgia,serif}
+    body{font-family:'Nunito',-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+    .serif{font-family:'Cormorant Garamond',Georgia,serif}
     ::-webkit-scrollbar{display:none}
     input,select,textarea,button{font-family:inherit}
 
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
     @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    @keyframes scaleIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+    @keyframes scaleIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
     @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
     @keyframes spin{to{transform:rotate(360deg)}}
-    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--rose-glow)}60%{box-shadow:0 0 0 16px transparent}}
-    @keyframes gradShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    @keyframes progressIn{from{width:0}to{width:var(--w)}}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--rose-glow)}60%{box-shadow:0 0 0 18px transparent}}
+    @keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
     @keyframes ringIn{from{stroke-dashoffset:var(--circ)}to{stroke-dashoffset:var(--end)}}
-    @keyframes bounce{0%,100%{transform:scale(1)}40%{transform:scale(1.15)}70%{transform:scale(.95)}}
-    @keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
-    @keyframes msgIn{from{opacity:0;transform:translateY(10px) scale(.97)}to{opacity:1;transform:none}}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+    @keyframes popIn{0%{transform:scale(0)}70%{transform:scale(1.12)}100%{transform:scale(1)}}
 
-    .fu{animation:fadeUp .42s cubic-bezier(.23,1,.32,1) both}
+    .fu{animation:fadeUp .4s cubic-bezier(.23,1,.32,1) both}
     .fi{animation:fadeIn .3s ease both}
-    .si{animation:scaleIn .32s cubic-bezier(.23,1,.32,1) both}
+    .si{animation:scaleIn .3s cubic-bezier(.23,1,.32,1) both}
+    .pi{animation:popIn .4s cubic-bezier(.23,1,.32,1) both}
 
-    /* ─── LAYOUT ─── */
     #root{display:flex;flex-direction:column;position:relative}
-    .screen{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:calc(86px + var(--safe-bottom));padding-top:calc(var(--safe-top) + 0px)}
+    .screen{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:calc(84px + var(--safe-bottom))}
     .screen.no-nav{padding-bottom:0}
 
-    /* ─── SURFACE / CARDS ─── */
-    .card{background:var(--surface);border-radius:24px;box-shadow:0 4px 24px rgba(155,93,229,.1);border:1.5px solid var(--border)}
-    .glass{background:rgba(255,255,255,.18);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.3)}
+    .card{background:var(--surface);border-radius:24px;box-shadow:0 4px 20px rgba(139,71,232,.09);border:1.5px solid var(--border)}
+    .glass{background:rgba(255,255,255,.15);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.25)}
 
-    /* ─── BUTTONS ─── */
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:18px;font-size:15px;font-weight:700;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;webkitTapHighlightColor:transparent;font-family:inherit}
-    .btn:active{transform:scale(.95)}
-    .btn-rose{background:var(--hero);background-size:200% 200%;animation:gradShift 5s ease infinite;color:#fff;box-shadow:0 8px 28px var(--rose-glow)}
-    .btn-ghost{background:rgba(155,93,229,.08);color:var(--muted);border:1.5px solid var(--border)}
-    .btn-danger{background:#FFF0F0;color:#E53935;border:1.5px solid #FECDD3}
-    .btn-sm{padding:9px 18px;font-size:13px;border-radius:12px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 26px;border-radius:18px;font-size:15px;font-weight:800;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent;font-family:inherit;letter-spacing:.01em}
+    .btn:active{transform:scale(.94)}
+    .btn-rose{background:var(--hero);background-size:200% 200%;animation:gradShift 5s ease infinite;color:#fff;box-shadow:0 8px 26px var(--rose-glow)}
+    .btn-ghost{background:rgba(139,71,232,.07);color:var(--muted);border:1.5px solid var(--border)}
+    .btn-danger{background:#FFF0F5;color:#C81A5E;border:1.5px solid #FFD6E8}
+    .btn-sm{padding:9px 18px;font-size:13px;border-radius:13px}
+    .btn-xs{padding:7px 13px;font-size:12px;border-radius:10px}
 
-    /* ─── INPUTS ─── */
-    .inp{width:100%;padding:15px 16px;font-size:15px;font-weight:500;color:var(--text);background:#FDF5FF;border:2px solid var(--border);border-radius:16px;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none;font-family:inherit}
-    .inp:focus{border-color:var(--violet);background:#fff}
-    .lbl{display:block;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
+    .inp{width:100%;padding:14px 16px;font-size:15px;font-weight:600;color:var(--text);background:#FBF4FF;border:2px solid var(--border);border-radius:16px;outline:none;transition:border-color .2s,background .2s;-webkit-appearance:none;font-family:inherit}
+    .inp:focus{border-color:var(--violet);background:#fff;box-shadow:0 0 0 4px rgba(139,71,232,.1)}
+    .lbl{display:block;font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:7px}
     .inp-wrap{margin-bottom:16px}
 
-    /* ─── BOTTOM NAV ─── */
-    .bot-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(155,93,229,.1);display:flex;align-items:stretch;padding-bottom:var(--safe-bottom);z-index:100;box-shadow:0 -4px 24px rgba(155,93,229,.1)}
-    .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 0 8px;background:none;border:none;cursor:pointer;webkitTapHighlightColor:transparent;position:relative;transition:color .2s;font-family:inherit}
-    .nav-btn .nav-icon{font-size:22px;line-height:1;transition:transform .2s}
-    .nav-btn .nav-label{font-size:10px;font-weight:700;letter-spacing:.03em;color:var(--light);transition:color .2s}
-    .nav-btn.active .nav-label{color:var(--rose)}
-    .nav-btn.active .nav-icon{transform:scale(1.15)}
-    .nav-btn::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:3px;background:var(--hero);border-radius:0 0 3px 3px;transition:width .25s cubic-bezier(.23,1,.32,1)}
-    .nav-btn.active::after{width:32px}
+    .bot-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.94);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(139,71,232,.08);display:flex;align-items:stretch;padding-bottom:var(--safe-bottom);z-index:100;box-shadow:0 -4px 24px rgba(139,71,232,.08)}
+    .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:10px 0 8px;background:none;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative;font-family:inherit}
+    .nav-btn .nicon{font-size:21px;line-height:1;transition:transform .22s cubic-bezier(.23,1,.32,1)}
+    .nav-btn .nlabel{font-size:9.5px;font-weight:800;color:var(--light);transition:color .2s;letter-spacing:.03em;text-transform:uppercase}
+    .nav-btn.active .nlabel{color:var(--rose)}
+    .nav-btn.active .nicon{transform:scale(1.18)}
+    .nav-btn::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:3px;background:var(--hero);border-radius:0 0 4px 4px;transition:width .28s cubic-bezier(.23,1,.32,1);background-size:200% 200%;animation:gradShift 5s ease infinite}
+    .nav-btn.active::before{width:36px}
 
-    /* ─── FAB ─── */
-    .fab{position:fixed;bottom:calc(var(--safe-bottom) + 78px);right:20px;width:60px;height:60px;border-radius:50%;background:var(--hero);background-size:200% 200%;animation:gradShift 5s ease infinite,pulse 2.5s ease-in-out infinite;color:#fff;border:none;font-size:28px;cursor:pointer;z-index:101;box-shadow:0 8px 28px var(--rose-glow);webkitTapHighlightColor:transparent;display:flex;align-items:center;justify-content:center;transition:transform .15s}
-    .fab:active{transform:scale(.9)}
+    .fab{position:fixed;bottom:calc(var(--safe-bottom) + 76px);right:18px;width:58px;height:58px;border-radius:50%;background:var(--hero);background-size:200% 200%;animation:gradShift 5s ease infinite,pulse 2.5s ease-in-out infinite;color:#fff;border:none;font-size:26px;cursor:pointer;z-index:101;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;transition:transform .15s;box-shadow:0 8px 28px var(--rose-glow)}
+    .fab:active{transform:scale(.88)}
 
-    /* ─── MODAL ─── */
-    .overlay{position:fixed;inset:0;background:rgba(26,10,46,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:200;animation:fadeIn .25s ease;display:flex;align-items:flex-end;justify-content:center}
-    .sheet{background:var(--surface);border-radius:28px 28px 0 0;width:100%;max-height:92vh;overflow-y:auto;animation:slideUp .38s cubic-bezier(.23,1,.32,1);padding-bottom:calc(24px + var(--safe-bottom))}
-    .sheet-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:14px auto 20px;flex-shrink:0}
+    .overlay{position:fixed;inset:0;background:rgba(28,10,40,.65);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:200;animation:fadeIn .22s ease;display:flex;align-items:flex-end;justify-content:center}
+    .sheet{background:var(--surface);border-radius:30px 30px 0 0;width:100%;max-height:94vh;overflow-y:auto;animation:slideUp .36s cubic-bezier(.23,1,.32,1);padding-bottom:calc(20px + var(--safe-bottom))}
+    .sheet-handle{width:44px;height:4px;background:var(--border);border-radius:2px;margin:14px auto 18px}
 
-    /* ─── AMOUNT DISPLAY ─── */
-    .amount-positive{color:var(--mint)}
-    .amount-negative{color:var(--rose)}
+    .status-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:50px;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
+    .cat-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 
-    /* ─── CATEGORY PILL ─── */
-    .cat-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+    .seg{display:flex;background:#F2EAFF;border-radius:14px;padding:4px;gap:4px}
+    .seg-btn{flex:1;padding:9px 4px;border:none;border-radius:11px;font-family:inherit;font-size:12px;font-weight:800;cursor:pointer;transition:all .2s;color:var(--muted);background:transparent;white-space:nowrap;letter-spacing:.01em}
+    .seg-btn.active{background:#fff;color:var(--text);box-shadow:0 2px 10px rgba(139,71,232,.14)}
 
-    /* ─── SEGMENT ─── */
-    .seg{display:flex;background:#F3EEF9;border-radius:14px;padding:4px;gap:4px}
-    .seg-btn{flex:1;padding:9px 6px;border:none;border-radius:11px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;color:var(--muted);background:transparent;white-space:nowrap}
-    .seg-btn.active{background:#fff;color:var(--text);box-shadow:0 2px 10px rgba(155,93,229,.15)}
+    .prog-track{background:#EFE6FF;border-radius:50px;height:8px;overflow:hidden}
+    .prog-fill{height:100%;border-radius:50px;transition:width .9s cubic-bezier(.23,1,.32,1)}
 
-    /* ─── PROGRESS BAR ─── */
-    .prog-track{background:#F0E8FF;border-radius:50px;height:8px;overflow:hidden}
-    .prog-fill{height:100%;border-radius:50px;transition:width .8s cubic-bezier(.23,1,.32,1)}
-
-    /* ─── CHIP ─── */
-    .chip{padding:7px 14px;border-radius:50px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid var(--border);background:transparent;color:var(--muted);webkitTapHighlightColor:transparent;white-space:nowrap;font-family:inherit;transition:all .2s}
+    .chip{padding:7px 14px;border-radius:50px;font-size:12px;font-weight:800;cursor:pointer;border:2px solid var(--border);background:transparent;color:var(--muted);-webkit-tap-highlight-color:transparent;white-space:nowrap;font-family:inherit;transition:all .2s}
     .chip.active{border-color:var(--rose);background:var(--rose-light);color:var(--rose)}
+    .chip:active{transform:scale(.94)}
 
-    /* ─── ONBOARDING ─── */
-    .ob-bg{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--hero);background-size:200% 200%;animation:gradShift 8s ease infinite;padding:32px 24px;position:relative;overflow:hidden}
-    .ob-circle{position:absolute;border-radius:50%;background:rgba(255,255,255,.07)}
-
-    /* ─── CHAT ─── */
-    .chat-bubble{max-width:82%;padding:12px 16px;border-radius:20px;font-size:14px;font-weight:500;line-height:1.65;animation:msgIn .3s ease both}
-    .bubble-ai{background:var(--surface);color:var(--text);border-radius:4px 20px 20px 20px;box-shadow:0 2px 12px rgba(155,93,229,.1);align-self:flex-start}
-    .bubble-user{background:var(--hero);background-size:200% 200%;animation:gradShift 5s ease infinite,msgIn .3s ease both;color:#fff;border-radius:20px 4px 20px 20px;align-self:flex-end}
-    .typing-dot{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1.2s ease-in-out infinite}
-    .typing-dot:nth-child(2){animation-delay:.2s}
-    .typing-dot:nth-child(3){animation-delay:.4s}
-
-    /* ─── MISC ─── */
-    .tx-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--border);cursor:pointer;webkitTapHighlightColor:transparent;transition:opacity .15s}
+    .tx-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--border);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
     .tx-row:last-child{border-bottom:none}
-    .tx-row:active{opacity:.7}
-    .section-title{font-size:19px;font-weight:700;color:var(--text);margin-bottom:14px;font-family:'Playfair Display',serif}
-    .p-screen{padding:20px 18px}
-    .date-sep{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:14px 0 8px}
+    .tx-row:active{opacity:.65}
+    .p-screen{padding:18px 16px}
+    .date-sep{font-size:10.5px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;padding:14px 0 8px}
 
-    /* Savings ring */
-    .savings-ring{transform:rotate(-90deg);flex-shrink:0}
-    .ring-bg{fill:none;stroke:#F0E8FF;stroke-width:6}
-    .ring-fill{fill:none;stroke-width:6;stroke-linecap:round;transition:none;animation:ringIn 1.2s cubic-bezier(.23,1,.32,1) both}
+    .ring-bg{fill:none;stroke:#EEE4FF;stroke-width:6}
+    .ring-fill{fill:none;stroke-width:6;stroke-linecap:round;animation:ringIn 1.2s cubic-bezier(.23,1,.32,1) both}
 
-    /* Hero numbers animation */
-    .hero-num{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:#fff;letter-spacing:-0.03em;line-height:1;text-shadow:0 2px 20px rgba(0,0,0,.15)}
+    .chat-bubble{max-width:82%;padding:12px 16px;border-radius:20px;font-size:14px;font-weight:500;line-height:1.7;animation:msgIn .3s ease both}
+    .bubble-ai{background:var(--surface);color:var(--text);border-radius:4px 20px 20px 20px;box-shadow:0 2px 14px rgba(139,71,232,.1)}
+    .bubble-user{background:var(--hero);background-size:200% 200%;animation:gradShift 5s ease infinite,msgIn .3s ease both;color:#fff;border-radius:20px 4px 20px 20px}
+    .tdot{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1.2s ease-in-out infinite}
+    .tdot:nth-child(2){animation-delay:.2s}
+    .tdot:nth-child(3){animation-delay:.4s}
+
+    .wish-card{background:var(--surface);border-radius:18px;border:1.5px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:13px;-webkit-tap-highlight-color:transparent}
+
+    .avatar-ring{width:80px;height:80px;border-radius:50%;background:var(--hero);background-size:200% 200%;animation:gradShift 6s ease infinite;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px var(--rose-glow);position:relative;flex-shrink:0}
+    .avatar-img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:3px solid #fff}
+    .avatar-placeholder{font-size:32px;line-height:1}
+
+    .stat-pill{background:var(--surface);border-radius:16px;padding:13px 15px;border:1.5px solid var(--border);display:flex;flex-direction:column;gap:4px}
+    .notif-dot{width:8px;height:8px;border-radius:50%;background:var(--rose);flex-shrink:0;box-shadow:0 0 0 2px var(--rose-light)}
   </style>
 </head>
 <body>
@@ -155,161 +143,153 @@ import{useState,useEffect,useCallback,useRef,useMemo}from'https://esm.sh/preact@
 import htm from'https://esm.sh/htm@3.1.1';
 const html=htm.bind(h);
 
-//
 const CATS=[
-  {k:'shopping',   l:'Shopping',     e:'🛍️', c:'#FF1F6E', bg:'#FFE0EC', g:'linear-gradient(135deg,#FF1F6E,#FF8C6B)', t:'expense'},
-  {k:'courses',    l:'Courses',      e:'🛒', c:'#00B894', bg:'#CCFAF2', g:'linear-gradient(135deg,#00D9A6,#4FACFE)', t:'expense'},
-  {k:'restaurant', l:'Restaurant',   e:'🍽️', c:'#FF7B54', bg:'#FFEDE7', g:'linear-gradient(135deg,#FF7B54,#FBBF24)', t:'expense'},
-  {k:'logement',   l:'Logement',     e:'🏠', c:'#9B5DE5', bg:'#F0E8FF', g:'linear-gradient(135deg,#9B5DE5,#C77DFF)', t:'expense'},
-  {k:'sante',      l:'Santé',        e:'💊', c:'#00C49F', bg:'#D0F7EE', g:'linear-gradient(135deg,#00C49F,#38BDF8)', t:'expense'},
-  {k:'transport',  l:'Transport',    e:'🚗', c:'#4FACFE', bg:'#DDEFFF', g:'linear-gradient(135deg,#4FACFE,#818CF8)', t:'expense'},
-  {k:'beaute',     l:'Beauté',       e:'💅', c:'#F472B6', bg:'#FFE0F2', g:'linear-gradient(135deg,#F472B6,#E879F9)', t:'expense'},
-  {k:'loisirs',    l:'Loisirs',      e:'🎬', c:'#FBBF24', bg:'#FFF3D0', g:'linear-gradient(135deg,#FBBF24,#F97316)', t:'expense'},
-  {k:'abos',       l:'Abonnements',  e:'📱', c:'#818CF8', bg:'#E8EAFF', g:'linear-gradient(135deg,#818CF8,#9B5DE5)', t:'expense'},
-  {k:'voyages',    l:'Voyages',      e:'✈️', c:'#06B6D4', bg:'#CDFAFF', g:'linear-gradient(135deg,#06B6D4,#38BDF8)', t:'expense'},
-  {k:'beaute2',    l:'Soins & Bien-être',e:'🧴',c:'#EC4899',bg:'#FDE8F5',g:'linear-gradient(135deg,#EC4899,#F472B6)',t:'expense'},
-  {k:'sport',      l:'Sport & Fitness',e:'🏋️',c:'#10B981',bg:'#D1FAE5',g:'linear-gradient(135deg,#10B981,#34D399)',t:'expense'},
-  {k:'enfants',    l:'Enfants',       e:'🧸', c:'#FCA5A5', bg:'#FEE2E2', g:'linear-gradient(135deg,#FCA5A5,#F472B6)', t:'expense'},
-  {k:'autre',      l:'Autre',         e:'💸', c:'#94A3B8', bg:'#E8EDF2', g:'linear-gradient(135deg,#94A3B8,#CBD5E1)', t:'expense'},
-  {k:'salaire',    l:'Salaire',       e:'💼', c:'#10B981', bg:'#D1FAE5', g:'linear-gradient(135deg,#10B981,#06B6D4)', t:'income'},
-  {k:'freelance',  l:'Freelance',     e:'💻', c:'#34D399', bg:'#CCFCE7', g:'linear-gradient(135deg,#34D399,#4FACFE)', t:'income'},
-  {k:'cadeau',     l:'Cadeau / Remb.',e:'🎁', c:'#F59E0B', bg:'#FEF3C7', g:'linear-gradient(135deg,#F59E0B,#FBBF24)', t:'income'},
-  {k:'invest',     l:'Investissement',e:'📈', c:'#3B82F6', bg:'#DBEAFE', g:'linear-gradient(135deg,#3B82F6,#8B5CF6)', t:'income'},
+  {k:'shopping',   l:'Shopping',        e:'🛍️',c:'#E0176C',bg:'#FFE8F3',g:'linear-gradient(135deg,#E0176C,#FF7D5C)',t:'expense'},
+  {k:'courses',    l:'Courses',          e:'🛒',c:'#00B894',bg:'#CDFCF3',g:'linear-gradient(135deg,#00CFA8,#4FACFE)',t:'expense'},
+  {k:'restaurant', l:'Restaurant',       e:'🍽️',c:'#FF7D5C',bg:'#FFEDE7',g:'linear-gradient(135deg,#FF7D5C,#F0A500)',t:'expense'},
+  {k:'logement',   l:'Logement',         e:'🏠',c:'#8B47E8',bg:'#EEE4FF',g:'linear-gradient(135deg,#8B47E8,#B57FFF)',t:'expense'},
+  {k:'sante',      l:'Santé',            e:'💊',c:'#00CFA8',bg:'#CDFCF3',g:'linear-gradient(135deg,#00CFA8,#38BDF8)',t:'expense'},
+  {k:'transport',  l:'Transport',        e:'🚗',c:'#4FACFE',bg:'#E0F2FF',g:'linear-gradient(135deg,#4FACFE,#818CF8)',t:'expense'},
+  {k:'beaute',     l:'Beauté',           e:'💄',c:'#F472B6',bg:'#FFE0F5',g:'linear-gradient(135deg,#F472B6,#E879F9)',t:'expense'},
+  {k:'loisirs',    l:'Loisirs',          e:'🎬',c:'#F0A500',bg:'#FEF5D9',g:'linear-gradient(135deg,#F0A500,#FF7D5C)',t:'expense'},
+  {k:'abos',       l:'Abonnements',      e:'📱',c:'#818CF8',bg:'#E8EAFF',g:'linear-gradient(135deg,#818CF8,#8B47E8)',t:'expense'},
+  {k:'voyages',    l:'Voyages',          e:'✈️',c:'#06B6D4',bg:'#CDFAFF',g:'linear-gradient(135deg,#06B6D4,#38BDF8)',t:'expense'},
+  {k:'soins',      l:'Soins & Bien-être',e:'🧴',c:'#EC4899',bg:'#FDE8F5',g:'linear-gradient(135deg,#EC4899,#F472B6)',t:'expense'},
+  {k:'sport',      l:'Sport & Fitness',  e:'🏋️',c:'#10B981',bg:'#D1FAE5',g:'linear-gradient(135deg,#10B981,#34D399)',t:'expense'},
+  {k:'enfants',    l:'Enfants',          e:'🧸',c:'#FCA5A5',bg:'#FEE2E2',g:'linear-gradient(135deg,#FCA5A5,#F472B6)',t:'expense'},
+  {k:'cadeaux',    l:'Cadeaux',          e:'🎁',c:'#F59E0B',bg:'#FEF3C7',g:'linear-gradient(135deg,#F59E0B,#FF7D5C)',t:'expense'},
+  {k:'education',  l:'Éducation',        e:'📚',c:'#6366F1',bg:'#E0E1FF',g:'linear-gradient(135deg,#6366F1,#8B47E8)',t:'expense'},
+  {k:'autre',      l:'Autre',            e:'💸',c:'#94A3B8',bg:'#E8EDF2',g:'linear-gradient(135deg,#94A3B8,#CBD5E1)',t:'expense'},
+  {k:'salaire',    l:'Salaire',          e:'💼',c:'#10B981',bg:'#D1FAE5',g:'linear-gradient(135deg,#10B981,#06B6D4)',t:'income'},
+  {k:'freelance',  l:'Freelance',        e:'💻',c:'#34D399',bg:'#CCFCE7',g:'linear-gradient(135deg,#34D399,#4FACFE)',t:'income'},
+  {k:'remb',       l:'Remboursement',    e:'💰',c:'#F59E0B',bg:'#FEF3C7',g:'linear-gradient(135deg,#F59E0B,#FBBF24)',t:'income'},
+  {k:'invest',     l:'Investissement',   e:'📈',c:'#3B82F6',bg:'#DBEAFE',g:'linear-gradient(135deg,#3B82F6,#8B47E8)',t:'income'},
+  {k:'allocation', l:'Allocation/CAF',   e:'🏛️',c:'#8B47E8',bg:'#EEE4FF',g:'linear-gradient(135deg,#8B47E8,#E0176C)',t:'income'},
 ];
+const CURRENCIES=[{s:'€',l:'EUR — Euro'},{s:'$',l:'USD — Dollar'},{s:'£',l:'GBP — Livre'},{s:'FCFA',l:'XOF — Franc CFA'},{s:'MAD',l:'MAD — Dirham'},{s:'CHF',l:'CHF — Franc Suisse'}];
+const PRIOS=[{k:'high',l:'Urgente',c:'#E0176C',bg:'#FFE8F3'},{k:'med',l:'Normale',c:'#F0A500',bg:'#FEF5D9'},{k:'low',l:'Envie',c:'#8B47E8',bg:'#EEE4FF'}];
+
 const getC=k=>CATS.find(c=>c.k===k)||CATS[CATS.length-1];
-const CURRENCIES=[{s:'€',l:'EUR'},{s:'$',l:'USD'},{s:'£',l:'GBP'},{s:'FCFA',l:'XOF'},{s:'MAD',l:'MAD'}];
+const getPrio=k=>PRIOS.find(p=>p.k===k)||PRIOS[1];
 const mkId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5);
-const fmtAmt=(n,cur='€')=>`${cur}${Math.abs(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,'\u202f')}`;
+const fmtAmt=(n,cur)=>{const s=Math.abs(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,'\u202f');return cur==='FCFA'?`${s} FCFA`:`${cur}${s}`};
 const fmtDate=d=>new Date(d).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
 const dayKey=d=>new Date(d).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
-const monthKey=d=>new Date(d).toLocaleDateString('fr-FR',{month:'long',year:'numeric'});
 const thisMonth=()=>{const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`};
-const isThisMonth=d=>d.startsWith(thisMonth());
-
-//
+const isThisMonth=d=>d&&d.startsWith(thisMonth());
 const LS={
   get:(k,def)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):def}catch{return def}},
   set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}},
 };
 
-//
-const Loader=()=>html`<div style=${{display:'flex',alignItems:'center',justifyContent:'center',height:'100%'}}>
-  <div style=${{width:44,height:44,borderRadius:'50%',border:'4px solid #F0E8FF',borderTopColor:'var(--rose)',animation:'spin .7s linear infinite'}}/>
-</div>`;
-
-const FInput=({label,value,onChange,type='text',placeholder='',prefix,min,step})=>html`
+const FInput=({label,value,onChange,type='text',placeholder='',prefix})=>html`
   <div class="inp-wrap">
     ${label&&html`<label class="lbl">${label}</label>`}
     <div style=${{position:'relative'}}>
-      ${prefix&&html`<span style=${{position:'absolute',left:14,top:'50%',transform:'translateY(-50%)',fontSize:16,fontWeight:700,color:'var(--muted)',pointerEvents:'none'}}>${prefix}</span>`}
-      <input class="inp" style=${{paddingLeft:prefix?'38px':undefined}} type=${type} value=${value} min=${min} step=${step}
-        onInput=${e=>onChange(e.target.value)} placeholder=${placeholder} />
+      ${prefix&&html`<span style=${{position:'absolute',left:14,top:'50%',transform:'translateY(-50%)',fontSize:15,fontWeight:800,color:'var(--muted)',pointerEvents:'none'}}>${prefix}</span>`}
+      <input class="inp" style=${{paddingLeft:prefix?'38px':undefined}} type=${type} value=${value} onInput=${e=>onChange(e.target.value)} placeholder=${placeholder}/>
     </div>
   </div>`;
 
 const FSelect=({label,value,onChange,options})=>html`
   <div class="inp-wrap">
     ${label&&html`<label class="lbl">${label}</label>`}
-    <select class="inp" style=${{cursor:'pointer',appearance:'none',backgroundImage:`url("data:image/svg+xml,%3Csvg width='16' height='10' viewBox='0 0 16 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L8 9L15 1' stroke='%239A7AB8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")`,backgroundRepeat:'no-repeat',backgroundPosition:'right 14px center',paddingRight:44}}
-      value=${value} onChange=${e=>onChange(e.target.value)}>
+    <select class="inp" style=${{cursor:'pointer',appearance:'none',backgroundImage:`url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%239474B4' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")`,backgroundRepeat:'no-repeat',backgroundPosition:'right 14px center',paddingRight:44}} value=${value} onChange=${e=>onChange(e.target.value)}>
       ${options.map(o=>html`<option value=${o.v}>${o.l}</option>`)}
     </select>
   </div>`;
 
-const Sheet=({title,onClose,children,action,actionLabel='Enregistrer',actionGrad=true})=>html`
+const Sheet=({title,onClose,children,action,actionLabel='Enregistrer',noPad})=>html`
   <div class="overlay" onClick=${e=>{if(e.target===e.currentTarget)onClose()}}>
     <div class="sheet">
       <div class="sheet-handle"/>
-      <div style=${{padding:'0 20px 8px',display:'flex',alignItems:'center',justifyContent:'space-between',borderBottom:'1px solid var(--border)',paddingBottom:16,marginBottom:8}}>
-        <h2 style=${{fontSize:20,fontFamily:"'Playfair Display',serif",fontWeight:700,color:'var(--text)'}}>${title}</h2>
-        <button onClick=${onClose} style=${{background:'rgba(155,93,229,.1)',border:'none',borderRadius:'50%',width:34,height:34,display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer',fontSize:18,color:'var(--muted)',fontFamily:'inherit'}}>×</button>
+      <div style=${{padding:'0 20px 14px',display:'flex',alignItems:'center',justifyContent:'space-between',borderBottom:'1px solid var(--border)',marginBottom:4}}>
+        <h2 class="serif" style=${{fontSize:22,fontWeight:700,color:'var(--text)'}}>${title}</h2>
+        <button onClick=${onClose} style=${{background:'rgba(139,71,232,.1)',border:'none',borderRadius:'50%',width:36,height:36,display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer',fontSize:19,color:'var(--muted)',fontFamily:'inherit',lineHeight:1}}>×</button>
       </div>
-      <div style=${{padding:'12px 20px 0'}}>${children}</div>
-      ${action&&html`<div style=${{padding:'8px 20px 0',display:'flex',gap:10}}>
-        <button onClick=${onClose} class="btn btn-ghost" style=${{flex:1}}>Annuler</button>
-        <button onClick=${action} class=${`btn ${actionGrad?'btn-rose':'btn-ghost'}`} style=${{flex:2}}>${actionLabel} ✓</button>
+      <div style=${{padding:noPad?'0':'12px 20px 0'}}>${children}</div>
+      ${action&&html`<div style=${{padding:'10px 20px 0',display:'flex',gap:10}}>
+        <button onClick=${onClose} class="btn btn-ghost" style=${{flex:1,padding:'13px'}}>Annuler</button>
+        <button onClick=${action} class="btn btn-rose" style=${{flex:2,padding:'13px'}}>${actionLabel} ✓</button>
       </div>`}
     </div>
   </div>`;
 
-//
-const DonutChart=({data,size=160})=>{
+const DonutChart=({data,size=150,cur})=>{
   const total=data.reduce((s,d)=>s+d.value,0);
-  if(!total)return html`<div style=${{width:size,height:size,borderRadius:'50%',background:'#F0E8FF',display:'flex',alignItems:'center',justifyContent:'center',fontSize:13,color:'var(--muted)',fontWeight:600}}>Vide</div>`;
-  const R=60,circ=2*Math.PI*R,strokeW=18;
-  let offset=0;
-  const segs=data.map(d=>{const pct=d.value/total,len=pct*circ,seg={...d,offset,pct,len};offset+=len;return seg;});
-  return html`<div style=${{position:'relative',width:size,height:size}}>
-    <svg width=${size} height=${size} viewBox="0 0 160 160" style=${{transform:'rotate(-90deg)'}}>
-      <circle cx="80" cy="80" r=${R} fill="none" stroke="#F0E8FF" stroke-width=${strokeW}/>
-      ${segs.map((s,i)=>html`<circle key=${i} cx="80" cy="80" r=${R} fill="none" stroke=${s.color}
-        stroke-width=${strokeW} stroke-dasharray="${s.len} ${circ}" stroke-dashoffset=${-s.offset}
-        stroke-linecap="round" style=${{transition:'stroke-dasharray .8s ease',opacity:.9}}/>`)}
+  if(!total)return html`<div style=${{width:size,height:size,borderRadius:'50%',background:'#EEE4FF',display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,color:'var(--muted)',fontWeight:700}}>Vide</div>`;
+  const R=56,circ=2*Math.PI*R;let offset=0;
+  const segs=data.map(d=>{const pct=d.value/total,len=pct*circ,seg={...d,offset,len};offset+=len;return seg;});
+  return html`<div style=${{position:'relative',width:size,height:size,flexShrink:0}}>
+    <svg width=${size} height=${size} viewBox="0 0 150 150" style=${{transform:'rotate(-90deg)'}}>
+      <circle cx="75" cy="75" r=${R} fill="none" stroke="#EEE4FF" stroke-width="18"/>
+      ${segs.map((s,i)=>html`<circle key=${i} cx="75" cy="75" r=${R} fill="none" stroke=${s.c} stroke-width="18"
+        stroke-dasharray="${s.len} ${circ}" stroke-dashoffset=${-s.offset} stroke-linecap="round" style=${{opacity:.92}}/>`)}
     </svg>
     <div style=${{position:'absolute',inset:0,display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
-      <div style=${{fontSize:11,fontWeight:700,color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.08em'}}>Total</div>
-      <div style=${{fontSize:17,fontWeight:800,color:'var(--text)',fontFamily:"'Playfair Display',serif"}}>${data[0]?.cur||'€'}${total.toFixed(0)}</div>
+      <div style=${{fontSize:10,fontWeight:800,color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.08em'}}>Dépenses</div>
+      <div class="serif" style=${{fontSize:15,fontWeight:700,color:'var(--text)',lineHeight:1.2}}>${fmtAmt(total,cur||'€')}</div>
     </div>
   </div>`;
 };
 
-//
 const SavingsRing=({pct,color,size=72})=>{
-  const R=28,circ=2*Math.PI*R,filled=Math.min(pct,100)/100*circ;
-  return html`<svg class="savings-ring" width=${size} height=${size} viewBox="0 0 72 72">
+  const R=27,circ=2*Math.PI*R,filled=Math.min(pct,100)/100*circ;
+  return html`<svg style=${{transform:'rotate(-90deg)',flexShrink:0}} width=${size} height=${size} viewBox="0 0 72 72">
     <circle class="ring-bg" cx="36" cy="36" r=${R}/>
-    <circle class="ring-fill" cx="36" cy="36" r=${R} stroke=${color}
-      stroke-dasharray=${circ} stroke-dashoffset=${circ-filled}
-      style=${{animationDuration:'1.2s',['--circ']:circ,['--end']:circ-filled}}/>
+    <circle class="ring-fill" cx="36" cy="36" r=${R} stroke=${color} stroke-dasharray=${circ} stroke-dashoffset=${circ-filled} style=${{['--circ']:circ,['--end']:circ-filled}}/>
   </svg>`;
 };
 
-//
 const CatPicker=({value,onChange,type})=>{
   const cats=CATS.filter(c=>c.t===type);
-  return html`<div style=${{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:8}}>
-    ${cats.map(c=>html`<button key=${c.k} onClick=${()=>onChange(c.k)}
-      style=${{background:value===c.k?c.g:c.bg,borderRadius:14,border:value===c.k?`2.5px solid ${c.c}`:'2.5px solid transparent',padding:'10px 4px',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:4,transition:'all .18s',boxShadow:value===c.k?`0 4px 16px ${c.c}44`:'none',WebkitTapHighlightColor:'transparent'}}>
-      <span style=${{fontSize:22,lineHeight:1}}>${c.e}</span>
-      <span style=${{fontSize:9,fontWeight:700,color:value===c.k?'#fff':c.c,lineHeight:1.2,textAlign:'center',letterSpacing:'.02em'}}>${c.l}</span>
+  return html`<div style=${{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:7}}>
+    ${cats.map(c=>html`<button key=${c.k} onClick=${()=>onChange(c.k)} style=${{background:value===c.k?c.g:c.bg,borderRadius:13,border:`2.5px solid ${value===c.k?c.c:'transparent'}`,padding:'9px 3px',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:4,transition:'all .18s',boxShadow:value===c.k?`0 4px 14px ${c.c}44`:'none',WebkitTapHighlightColor:'transparent'}}>
+      <span style=${{fontSize:20,lineHeight:1}}>${c.e}</span>
+      <span style=${{fontSize:8.5,fontWeight:800,color:value===c.k?'#fff':c.c,lineHeight:1.2,textAlign:'center'}}>${c.l}</span>
     </button>`)}
   </div>`;
 };
 
-//
 const TxForm=({onClose,onSave,initial})=>{
   const [type,setType]=useState(initial?.type||'expense');
   const [amount,setAmount]=useState(initial?.amount?String(initial.amount):'');
   const [cat,setCat]=useState(initial?.cat||'shopping');
   const [desc,setDesc]=useState(initial?.desc||'');
   const [date,setDate]=useState(initial?.date||new Date().toISOString().split('T')[0]);
+  const [note,setNote]=useState(initial?.note||'');
+  const [recur,setRecur]=useState(initial?.recur||false);
   const save=()=>{
     const n=parseFloat(amount);
     if(!n||n<=0)return;
-    onSave({id:initial?.id||mkId(),type,amount:n,cat,desc,date,updatedAt:Date.now()});
+    onSave({id:initial?.id||mkId(),type,amount:n,cat,desc,date,note,recur,updatedAt:Date.now()});
     onClose();
   };
+  const cur=window._fCur||'€';
   return html`<${Sheet} title=${initial?'Modifier':'Nouvelle transaction'} onClose=${onClose} action=${save} actionLabel="Ajouter">
-    <div class="seg" style=${{marginBottom:18}}>
-      ${['expense','income'].map(t=>html`<button key=${t} class=${`seg-btn ${type===t?'active':''}`} onClick=${()=>setType(t)}>
+    <div class="seg" style=${{marginBottom:16}}>
+      ${['expense','income'].map(t=>html`<button key=${t} class=${`seg-btn ${type===t?'active':''}`} onClick=${()=>{setType(t);setCat(t==='income'?'salaire':'shopping');}}>
         ${t==='expense'?'💸 Dépense':'💰 Revenu'}
       </button>`)}
     </div>
     <div class="inp-wrap">
       <label class="lbl">Montant</label>
       <div style=${{position:'relative'}}>
-        <span style=${{position:'absolute',left:14,top:'50%',transform:'translateY(-50%)',fontSize:22,fontWeight:800,color:'var(--rose)',fontFamily:"'Playfair Display',serif"}}>${window._finCur||'€'}</span>
-        <input class="inp" type="number" min="0" step="0.01" value=${amount} onInput=${e=>setAmount(e.target.value)}
-          placeholder="0.00" style=${{paddingLeft:38,fontSize:24,fontWeight:800,fontFamily:"'Playfair Display',serif",color:'var(--text)'}}/>
+        <span style=${{position:'absolute',left:13,top:'50%',transform:'translateY(-50%)',fontSize:20,fontWeight:900,color:'var(--rose)',fontFamily:"'Cormorant Garamond',serif"}}>${cur}</span>
+        <input class="inp" type="number" min="0" step="0.01" value=${amount} onInput=${e=>setAmount(e.target.value)} placeholder="0.00" style=${{paddingLeft:36,fontSize:26,fontWeight:900,fontFamily:"'Cormorant Garamond',serif",color:'var(--text)'}}/>
       </div>
     </div>
+    <${FInput} label="Description" value=${desc} onChange=${setDesc} placeholder="ex: Zara, Leclerc, Netflix…"/>
+    <${FInput} label="Date" value=${date} onChange=${setDate} type="date"/>
     <div class="inp-wrap">
-      <label class="lbl">Description</label>
-      <input class="inp" value=${desc} onInput=${e=>setDesc(e.target.value)} placeholder="ex : Zara, Leclerc, Loyer…"/>
+      <label class="lbl">Note (optionnel)</label>
+      <input class="inp" value=${note} onInput=${e=>setNote(e.target.value)} placeholder="Remarque, numéro de facture…"/>
     </div>
-    <div class="inp-wrap">
-      <label class="lbl">Date</label>
-      <input class="inp" type="date" value=${date} onInput=${e=>setDate(e.target.value)}/>
+    <div style=${{display:'flex',alignItems:'center',gap:12,background:'var(--violet-light)',borderRadius:14,padding:'12px 14px',marginBottom:16,cursor:'pointer'}} onClick=${()=>setRecur(v=>!v)}>
+      <div style=${{width:42,height:24,borderRadius:50,background:recur?'var(--violet)':'#D8CAFF',transition:'background .2s',position:'relative',flexShrink:0}}>
+        <div style=${{width:20,height:20,borderRadius:'50%',background:'#fff',position:'absolute',top:2,left:recur?20:2,transition:'left .2s',boxShadow:'0 1px 4px rgba(0,0,0,.2)'}}/>
+      </div>
+      <span style=${{fontSize:13,fontWeight:700,color:'var(--violet)'}}>🔁 Transaction récurrente (mensuelle)</span>
     </div>
     <div class="inp-wrap" style=${{marginBottom:20}}>
       <label class="lbl">Catégorie</label>
@@ -318,185 +298,168 @@ const TxForm=({onClose,onSave,initial})=>{
   </${Sheet}>`;
 };
 
-//
 const Onboarding=({onDone})=>{
   const [step,setStep]=useState(0);
   const [name,setName]=useState('');
   const [cur,setCur]=useState('€');
-  return html`<div class="ob-bg screen no-nav">
-    <div class="ob-circle" style=${{width:300,height:300,top:-80,right:-80}}/>
-    <div class="ob-circle" style=${{width:200,height:200,bottom:-60,left:-60}}/>
-    <div class="ob-circle" style=${{width:150,height:150,top:'40%',left:-50}}/>
-    ${step===0&&html`<div class="fu" style=${{textAlign:'center',position:'relative',zIndex:1,width:'100%',maxWidth:360}}>
-      <div style=${{fontSize:88,marginBottom:4,animation:'float 3s ease-in-out infinite',display:'block'}}>💖</div>
-      <h1 style=${{fontSize:42,fontFamily:"'Playfair Display',serif",color:'#fff',marginBottom:8,fontWeight:900,lineHeight:1.1}}>Finella</h1>
-      <p style=${{color:'rgba(255,255,255,.8)',fontSize:16,marginBottom:40,fontWeight:500,lineHeight:1.6}}>Ton assistante financière<br/>personnelle & intelligente</p>
-      <button class="btn" style=${{background:'rgba(255,255,255,.95)',color:'var(--rose)',fontSize:17,fontWeight:800,borderRadius:20,padding:'17px 40px',boxShadow:'0 8px 32px rgba(0,0,0,.2)',width:'100%'}}
-        onClick=${()=>setStep(1)}>Commencer ✨</button>
+  return html`<div style=${{minHeight:'100%',display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 8s ease infinite',padding:'32px 24px',position:'relative',overflow:'hidden'}} class="screen no-nav">
+    <div style=${{position:'absolute',width:280,height:280,borderRadius:'50%',background:'rgba(255,255,255,.07)',top:-80,right:-80}}/>
+    <div style=${{position:'absolute',width:180,height:180,borderRadius:'50%',background:'rgba(255,255,255,.05)',bottom:-50,left:-50}}/>
+    ${step===0&&html`<div class="fu" style=${{textAlign:'center',position:'relative',zIndex:1,width:'100%',maxWidth:340}}>
+      <div style=${{fontSize:90,marginBottom:6,animation:'float 3s ease-in-out infinite',display:'block'}}>💖</div>
+      <h1 class="serif" style=${{fontSize:52,color:'#fff',margin:'0 0 8px',fontWeight:700,lineHeight:1,letterSpacing:'-.02em'}}>Finella</h1>
+      <p style=${{color:'rgba(255,255,255,.8)',fontSize:15,marginBottom:40,fontWeight:600,lineHeight:1.6}}>Ton assistante financière<br/>personnelle et intelligente ✨</p>
+      <button class="btn" style=${{background:'rgba(255,255,255,.95)',color:'var(--rose)',fontSize:16,fontWeight:900,borderRadius:20,padding:'17px 40px',boxShadow:'0 8px 32px rgba(0,0,0,.18)',width:'100%'}} onClick=${()=>setStep(1)}>Commencer 🌸</button>
     </div>`}
-    ${step===1&&html`<div class="fu" style=${{width:'100%',maxWidth:360,position:'relative',zIndex:1}}>
-      <div style=${{textAlign:'center',marginBottom:32}}>
-        <div style=${{fontSize:60,marginBottom:8}}>👋</div>
-        <h2 style=${{fontSize:28,fontFamily:"'Playfair Display',serif",color:'#fff',fontWeight:700}}>Comment tu t'appelles ?</h2>
-        <p style=${{color:'rgba(255,255,255,.7)',fontSize:14,marginTop:6}}>Pour personnaliser ton expérience</p>
+    ${step===1&&html`<div class="fu" style=${{width:'100%',maxWidth:340,position:'relative',zIndex:1}}>
+      <div style=${{textAlign:'center',marginBottom:28}}>
+        <div style=${{fontSize:64,marginBottom:8}}>👋</div>
+        <h2 class="serif" style=${{fontSize:32,color:'#fff',fontWeight:700}}>Comment tu t'appelles ?</h2>
+        <p style=${{color:'rgba(255,255,255,.7)',fontSize:14,marginTop:6}}>Pour personnaliser ton espace</p>
       </div>
-      <input class="inp" value=${name} onInput=${e=>setName(e.target.value)}
-        placeholder="Ton prénom…" style=${{fontSize:18,textAlign:'center',fontWeight:700,background:'rgba(255,255,255,.95)',borderColor:'transparent',borderRadius:20,padding:'18px'}}/>
-      <button class="btn" style=${{background:'rgba(255,255,255,.95)',color:'var(--rose)',width:'100%',marginTop:16,fontSize:16,fontWeight:800,borderRadius:18,padding:'16px'}}
-        onClick=${()=>name.trim()&&setStep(2)}>Continuer →</button>
+      <input class="inp" value=${name} onInput=${e=>setName(e.target.value)} placeholder="Ton prénom…" style=${{fontSize:18,textAlign:'center',fontWeight:800,background:'rgba(255,255,255,.95)',borderColor:'transparent',borderRadius:20,padding:'18px'}}/>
+      <button class="btn" style=${{background:'rgba(255,255,255,.95)',color:'var(--rose)',width:'100%',marginTop:14,fontSize:16,fontWeight:900,borderRadius:18,padding:'16px'}} onClick=${()=>name.trim()&&setStep(2)}>Continuer →</button>
     </div>`}
-    ${step===2&&html`<div class="fu" style=${{width:'100%',maxWidth:360,position:'relative',zIndex:1}}>
-      <div style=${{textAlign:'center',marginBottom:32}}>
-        <div style=${{fontSize:60,marginBottom:8}}>💱</div>
-        <h2 style=${{fontSize:28,fontFamily:"'Playfair Display',serif",color:'#fff',fontWeight:700}}>Ta devise ?</h2>
+    ${step===2&&html`<div class="fu" style=${{width:'100%',maxWidth:340,position:'relative',zIndex:1}}>
+      <div style=${{textAlign:'center',marginBottom:28}}>
+        <div style=${{fontSize:64,marginBottom:8}}>💱</div>
+        <h2 class="serif" style=${{fontSize:32,color:'#fff',fontWeight:700}}>Ta devise ?</h2>
       </div>
-      <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
-        ${CURRENCIES.map(c=>html`<button key=${c.s} onClick=${()=>setCur(c.s)}
-          style=${{padding:'16px',borderRadius:16,border:`2.5px solid ${cur===c.s?'#fff':'rgba(255,255,255,.2)'}`,background:cur===c.s?'rgba(255,255,255,.25)':'rgba(255,255,255,.1)',color:'#fff',cursor:'pointer',fontFamily:'inherit',fontWeight:700,fontSize:16,transition:'all .2s'}}>
-          ${c.s} <span style=${{fontSize:12,opacity:.7}}>${c.l}</span>
+      <div style=${{display:'flex',flexDirection:'column',gap:8}}>
+        ${CURRENCIES.map(c=>html`<button key=${c.s} onClick=${()=>setCur(c.s)} style=${{padding:'14px 18px',borderRadius:14,border:`2.5px solid ${cur===c.s?'#fff':'rgba(255,255,255,.18)'}`,background:cur===c.s?'rgba(255,255,255,.22)':'rgba(255,255,255,.08)',color:'#fff',cursor:'pointer',fontFamily:'inherit',fontWeight:700,fontSize:15,transition:'all .2s',textAlign:'left'}}>
+          <span style=${{fontSize:18,marginRight:10}}>${c.s}</span>${c.l}
         </button>`)}
       </div>
-      <button class="btn" style=${{background:'rgba(255,255,255,.95)',color:'var(--rose)',width:'100%',marginTop:20,fontSize:16,fontWeight:800,borderRadius:18,padding:'16px'}}
-        onClick=${()=>onDone({name:name.trim(),currency:cur})}>
-        C'est parti 🚀
-      </button>
+      <button class="btn" style=${{background:'rgba(255,255,255,.95)',color:'var(--rose)',width:'100%',marginTop:18,fontSize:16,fontWeight:900,borderRadius:18,padding:'16px'}} onClick=${()=>onDone({name:name.trim(),currency:cur})}>C'est parti 🚀</button>
     </div>`}
   </div>`;
 };
 
-//
-const HomePage=({txs,savings,name,cur,onAdd})=>{
+const ProfileAvatar=({photo,name,size=44,onClick})=>{
+  const initials=(name||'').slice(0,2).toUpperCase()||'👤';
+  return html`<div style=${{width:size,height:size,borderRadius:'50%',background:photo?'transparent':'var(--hero)',backgroundSize:'200% 200%',animation:photo?undefined:'gradShift 5s ease infinite',display:'flex',alignItems:'center',justifyContent:'center',cursor:onClick?'pointer':'default',overflow:'hidden',flexShrink:0,boxShadow:`0 3px 12px var(--rose-glow)`}} onClick=${onClick}>
+    ${photo?html`<img src=${photo} style=${{width:'100%',height:'100%',objectFit:'cover'}}/>`:html`<span style=${{fontSize:size*0.38,fontWeight:900,color:'#fff',lineHeight:1}}>${initials}</span>`}
+  </div>`;
+};
+
+const HomePage=({txs,savings,name,cur,photo,onAdd,navTo})=>{
   const monthTxs=txs.filter(t=>isThisMonth(t.date));
   const income=monthTxs.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
   const expense=monthTxs.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
   const balance=income-expense;
-  const catData=Object.entries(monthTxs.filter(t=>t.type==='expense').reduce((acc,t)=>{
-    acc[t.cat]=(acc[t.cat]||0)+t.amount; return acc;
-  },{})).map(([k,v])=>({...getC(k),value:v,color:getC(k).c,cur})).sort((a,b)=>b.value-a.value).slice(0,6);
-
-  // Last 6 months bar
+  const catData=Object.entries(monthTxs.filter(t=>t.type==='expense').reduce((acc,t)=>{acc[t.cat]=(acc[t.cat]||0)+t.amount;return acc},{})).map(([k,v])=>({...getC(k),value:v})).sort((a,b)=>b.value-a.value).slice(0,6);
   const months=[];
-  for(let i=5;i>=0;i--){
-    const d=new Date(); d.setMonth(d.getMonth()-i);
-    const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-    const label=d.toLocaleDateString('fr-FR',{month:'short'});
-    const total=txs.filter(t=>t.type==='expense'&&t.date.startsWith(key)).reduce((s,t)=>s+t.amount,0);
-    months.push({label,total,key,isCur:i===0});
-  }
+  for(let i=5;i>=0;i--){const d=new Date();d.setMonth(d.getMonth()-i);const key=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;const label=d.toLocaleDateString('fr-FR',{month:'short'});const total=txs.filter(t=>t.type==='expense'&&t.date.startsWith(key)).reduce((s,t)=>s+t.amount,0);months.push({label,total,isCur:i===0});}
   const maxM=Math.max(...months.map(m=>m.total),1);
-  const now=new Date();
-  const greeting=now.getHours()<12?'Bonjour':now.getHours()<18?'Bonsoir':'Bonsoir';
+  const now=new Date();const h=now.getHours();const greeting=h<6?'Bonne nuit':h<12?'Bonjour':h<18?'Bonjour':'Bonsoir';
+  const totalSaved=savings.reduce((s,g)=>s+g.current,0);
 
-  return html`<div class="p-screen">
-    
-    <div class="fu card" style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',padding:'22px 22px 28px',marginBottom:16,border:'none',boxShadow:'0 12px 36px var(--rose-glow)',position:'relative',overflow:'hidden'}}>
-      <div style=${{position:'absolute',top:-40,right:-40,width:160,height:160,borderRadius:'50%',background:'rgba(255,255,255,.07)'}}/>
-      <div style=${{position:'absolute',bottom:-30,left:30,width:100,height:100,borderRadius:'50%',background:'rgba(255,255,255,.05)'}}/>
+  return html`<div class="p-screen" style=${{paddingTop:0}}>
+    <div style=${{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'14px 2px 16px'}}>
+      <div>
+        <div style=${{fontSize:12,fontWeight:700,color:'var(--muted)'}}>${greeting} ✨</div>
+        <div class="serif" style=${{fontSize:26,fontWeight:700,color:'var(--text)',lineHeight:1.1}}>${name}</div>
+      </div>
+      <${ProfileAvatar} photo=${photo} name=${name} size=${46} onClick=${()=>navTo('profile')}/>
+    </div>
+
+    <div class="fu card" style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',padding:'22px 20px 24px',marginBottom:14,border:'none',boxShadow:'0 14px 38px var(--rose-glow)',position:'relative',overflow:'hidden'}}>
+      <div style=${{position:'absolute',top:-50,right:-50,width:180,height:180,borderRadius:'50%',background:'rgba(255,255,255,.07)'}}/>
+      <div style=${{position:'absolute',bottom:-30,left:20,width:110,height:110,borderRadius:'50%',background:'rgba(255,255,255,.05)'}}/>
       <div style=${{position:'relative',zIndex:1}}>
-        <div style=${{fontSize:13,fontWeight:600,color:'rgba(255,255,255,.75)',marginBottom:4}}>${greeting}, ${name} 💖</div>
-        <div style=${{fontSize:11,fontWeight:700,color:'rgba(255,255,255,.55)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:10}}>Solde du mois</div>
-        <div class="hero-num">${balance>=0?'+':'-'}${fmtAmt(balance,cur)}</div>
-        <div style=${{display:'flex',gap:20,marginTop:18}}>
-          <div>
-            <div style=${{fontSize:11,color:'rgba(255,255,255,.6)',fontWeight:600,marginBottom:2}}>↑ Revenus</div>
-            <div style=${{fontSize:17,fontWeight:800,color:'rgba(255,255,255,.95)',fontFamily:"'Playfair Display',serif"}}>${fmtAmt(income,cur)}</div>
+        <div style=${{fontSize:11,fontWeight:800,color:'rgba(255,255,255,.65)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:6}}>Solde mensuel</div>
+        <div class="serif" style=${{fontSize:44,fontWeight:700,color:'#fff',lineHeight:1,marginBottom:16,letterSpacing:'-.02em'}}>${balance>=0?'+':''}<span style=${{fontSize:balance>=0?44:36}}>${fmtAmt(balance,cur)}</span></div>
+        <div style=${{display:'flex',gap:0}}>
+          <div style=${{flex:1}}>
+            <div style=${{fontSize:11,color:'rgba(255,255,255,.6)',fontWeight:700,marginBottom:3}}>↑ Revenus</div>
+            <div class="serif" style=${{fontSize:18,fontWeight:700,color:'rgba(255,255,255,.95)'}}>${fmtAmt(income,cur)}</div>
           </div>
-          <div style=${{width:1,background:'rgba(255,255,255,.15)'}}/>
-          <div>
-            <div style=${{fontSize:11,color:'rgba(255,255,255,.6)',fontWeight:600,marginBottom:2}}>↓ Dépenses</div>
-            <div style=${{fontSize:17,fontWeight:800,color:'rgba(255,255,255,.95)',fontFamily:"'Playfair Display',serif"}}>${fmtAmt(expense,cur)}</div>
+          <div style=${{width:1,background:'rgba(255,255,255,.18)',margin:'0 16px'}}/>
+          <div style=${{flex:1}}>
+            <div style=${{fontSize:11,color:'rgba(255,255,255,.6)',fontWeight:700,marginBottom:3}}>↓ Dépenses</div>
+            <div class="serif" style=${{fontSize:18,fontWeight:700,color:'rgba(255,255,255,.95)'}}>${fmtAmt(expense,cur)}</div>
+          </div>
+          <div style=${{width:1,background:'rgba(255,255,255,.18)',margin:'0 16px'}}/>
+          <div style=${{flex:1}}>
+            <div style=${{fontSize:11,color:'rgba(255,255,255,.6)',fontWeight:700,marginBottom:3}}>💎 Épargne</div>
+            <div class="serif" style=${{fontSize:18,fontWeight:700,color:'rgba(255,255,255,.95)'}}>${fmtAmt(totalSaved,cur)}</div>
           </div>
         </div>
       </div>
     </div>
 
-    
-    <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:16}}>
-      <div class="fu card" style=${{padding:'15px 16px',animationDelay:'80ms'}}>
-        <div style=${{fontSize:10,fontWeight:700,color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:6}}>Épargne totale</div>
-        <div style=${{fontSize:20,fontWeight:900,color:'var(--gold)',fontFamily:"'Playfair Display',serif"}}>${fmtAmt(savings.reduce((s,g)=>s+g.current,0),cur)}</div>
-        <div style=${{fontSize:11,color:'var(--light)',fontWeight:600,marginTop:2}}>${savings.length} objectif${savings.length!==1?'s':''}</div>
+    <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:14}}>
+      <div class="fu card" style=${{padding:'14px 15px',animationDelay:'60ms'}}>
+        <div style=${{fontSize:10,fontWeight:800,color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:5}}>Ce mois</div>
+        <div class="serif" style=${{fontSize:22,fontWeight:700,color:'var(--rose)',marginBottom:2}}>${monthTxs.filter(t=>t.type==='expense').length}</div>
+        <div style=${{fontSize:11,color:'var(--light)',fontWeight:700}}>transactions</div>
       </div>
-      <div class="fu card" style=${{padding:'15px 16px',animationDelay:'120ms'}}>
-        <div style=${{fontSize:10,fontWeight:700,color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:6}}>Transactions</div>
-        <div style=${{fontSize:20,fontWeight:900,color:'var(--violet)',fontFamily:"'Playfair Display',serif"}}>${monthTxs.length}</div>
-        <div style=${{fontSize:11,color:'var(--light)',fontWeight:600,marginTop:2}}>ce mois-ci</div>
+      <div class="fu card" style=${{padding:'14px 15px',animationDelay:'90ms',cursor:'pointer'}} onClick=${()=>navTo('savings')}>
+        <div style=${{fontSize:10,fontWeight:800,color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:5}}>Objectifs</div>
+        <div class="serif" style=${{fontSize:22,fontWeight:700,color:'var(--gold)',marginBottom:2}}>${savings.length}</div>
+        <div style=${{fontSize:11,color:'var(--light)',fontWeight:700}}>${savings.filter(g=>g.current>=g.target).length} atteint${savings.filter(g=>g.current>=g.target).length!==1?'s':''}</div>
       </div>
     </div>
 
-    
-    ${catData.length>0&&html`<div class="fu card" style=${{padding:'18px 18px 16px',marginBottom:16,animationDelay:'140ms'}}>
-      <h3 class="section-title" style=${{fontSize:16,marginBottom:14}}>Mes dépenses 🍩</h3>
-      <div style=${{display:'flex',alignItems:'center',gap:16}}>
-        <${DonutChart} data=${catData} size=${140}/>
+    ${catData.length>0&&html`<div class="fu card" style=${{padding:'16px 16px 14px',marginBottom:14,animationDelay:'110ms'}}>
+      <h3 class="serif" style=${{fontSize:18,fontWeight:700,marginBottom:14}}>Dépenses du mois</h3>
+      <div style=${{display:'flex',alignItems:'center',gap:14}}>
+        <${DonutChart} data=${catData} cur=${cur} size=${140}/>
         <div style=${{flex:1,display:'flex',flexDirection:'column',gap:7}}>
           ${catData.slice(0,5).map(d=>html`<div key=${d.k} style=${{display:'flex',alignItems:'center',gap:7}}>
-            <div style=${{width:8,height:8,borderRadius:'50%',background:d.c,flexShrink:0}}/>
-            <span style=${{fontSize:11,fontWeight:600,color:'var(--muted)',flex:1,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>${d.l}</span>
+            <div style=${{width:7,height:7,borderRadius:'50%',background:d.c,flexShrink:0}}/>
+            <span style=${{fontSize:11,fontWeight:700,color:'var(--muted)',flex:1,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>${d.l}</span>
             <span style=${{fontSize:12,fontWeight:800,color:'var(--text)'}}>${fmtAmt(d.value,cur)}</span>
           </div>`)}
         </div>
       </div>
     </div>`}
 
-    
-    ${months.some(m=>m.total>0)&&html`<div class="fu card" style=${{padding:'18px 18px 16px',marginBottom:16,animationDelay:'200ms'}}>
-      <h3 class="section-title" style=${{fontSize:16,marginBottom:16}}>Tendance 6 mois 📊</h3>
-      <div style=${{display:'flex',alignItems:'flex-end',gap:8,height:80}}>
-        ${months.map(m=>html`<div key=${m.key} style=${{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:4}}>
-          <div style=${{width:'100%',borderRadius:'6px 6px 0 0',background:m.isCur?'var(--hero)':'#F0E8FF',backgroundSize:'200% 200%',animation:m.isCur?'gradShift 5s ease infinite':undefined,height:`${Math.max((m.total/maxM)*60,3)}px`,transition:'height .8s cubic-bezier(.23,1,.32,1)'}}/>
-          <span style=${{fontSize:9,fontWeight:700,color:m.isCur?'var(--rose)':'var(--light)',letterSpacing:'.02em'}}>${m.label}</span>
+    ${months.some(m=>m.total>0)&&html`<div class="fu card" style=${{padding:'16px 16px 14px',marginBottom:14,animationDelay:'150ms'}}>
+      <h3 class="serif" style=${{fontSize:18,fontWeight:700,marginBottom:14}}>Tendance 6 mois 📊</h3>
+      <div style=${{display:'flex',alignItems:'flex-end',gap:7,height:72}}>
+        ${months.map(m=>html`<div key=${m.label} style=${{flex:1,display:'flex',flexDirection:'column',alignItems:'center',gap:4}}>
+          <div style=${{width:'100%',borderRadius:'6px 6px 0 0',background:m.isCur?'var(--hero)':'#EEE4FF',backgroundSize:m.isCur?'200% 200%':undefined,animation:m.isCur?'gradShift 5s ease infinite':undefined,height:`${Math.max(m.total/maxM*60,3)}px`,transition:'height .9s cubic-bezier(.23,1,.32,1)'}}/>
+          <span style=${{fontSize:9,fontWeight:800,color:m.isCur?'var(--rose)':'var(--light)'}}>${m.label}</span>
         </div>`)}
       </div>
     </div>`}
 
-    
-    <div class="fu" style=${{animationDelay:'240ms'}}>
-      <div style=${{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:12}}>
-        <h3 class="section-title" style=${{fontSize:16,margin:0}}>Récents ✨</h3>
+    <div class="fu" style=${{animationDelay:'180ms'}}>
+      <div style=${{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:10}}>
+        <h3 class="serif" style=${{fontSize:18,fontWeight:700}}>Récentes ✨</h3>
+        <button onClick=${()=>navTo('txs')} style=${{background:'none',border:'none',color:'var(--rose)',fontWeight:800,fontSize:12,cursor:'pointer',fontFamily:'inherit'}}>Tout voir →</button>
       </div>
       ${txs.length===0?html`<div class="card" style=${{padding:'36px 20px',textAlign:'center'}}>
-        <div style=${{fontSize:56,marginBottom:10,animation:'float 3s ease-in-out infinite',display:'block'}}>🌸</div>
-        <div style=${{fontSize:15,fontWeight:700,color:'var(--text)',marginBottom:6}}>Aucune transaction</div>
-        <div style=${{fontSize:13,color:'var(--muted)',marginBottom:20,lineHeight:1.65}}>Commence à suivre tes finances<br/>en ajoutant ta première dépense !</div>
+        <div style=${{fontSize:58,marginBottom:10,animation:'float 3s ease-in-out infinite',display:'block'}}>🌸</div>
+        <div style=${{fontSize:15,fontWeight:800,color:'var(--text)',marginBottom:6}}>Prête à commencer ?</div>
+        <div style=${{fontSize:13,color:'var(--muted)',marginBottom:18,lineHeight:1.6}}>Ajoute ta première dépense !</div>
         <button class="btn btn-rose btn-sm" onClick=${onAdd}>+ Ajouter</button>
       </div>`:html`<div class="card" style=${{padding:'4px 16px'}}>
-        ${[...txs].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8).map(t=>{
-          const c=getC(t.cat);
-          return html`<div key=${t.id} class="tx-row">
-            <div class="cat-icon" style=${{background:c.bg}}>${c.e}</div>
-            <div style=${{flex:1,minWidth:0}}>
-              <div style=${{fontSize:14,fontWeight:700,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>${t.desc||c.l}</div>
-              <div style=${{fontSize:11,color:'var(--muted)',fontWeight:500}}>${c.l} · ${fmtDate(t.date)}</div>
-            </div>
-            <div style=${{fontSize:15,fontWeight:800,color:t.type==='income'?'var(--mint)':'var(--rose)',fontFamily:"'Playfair Display',serif"}}>
-              ${t.type==='income'?'+':'-'}${fmtAmt(t.amount,cur)}
-            </div>
-          </div>`;
-        })}
-      </div>`}
+        ${[...txs].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,7).map(t=>{const c=getC(t.cat);return html`<div key=${t.id} class="tx-row">
+          <div class="cat-icon" style=${{background:c.g,boxShadow:`0 3px 10px ${c.c}33`}}><span style=${{filter:'brightness(0) invert(1)'}}>${c.e}</span></div>
+          <div style=${{flex:1,minWidth:0}}>
+            <div style=${{fontSize:14,fontWeight:700,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>${t.desc||c.l}${t.recur?html`<span style=${{fontSize:11,marginLeft:5}}>🔁</span>`:''}</div>
+            <div style=${{fontSize:11,color:'var(--muted)',fontWeight:600}}>${c.l} · ${fmtDate(t.date)}</div>
+          </div>
+          <div class="serif" style=${{fontSize:15,fontWeight:700,color:t.type==='income'?'var(--mint)':'var(--rose)'}}>${t.type==='income'?'+':'-'}${fmtAmt(t.amount,cur)}</div>
+        </div>`;})}</div>`}
     </div>
-    <div style=${{height:16}}/>
+    <div style=${{height:14}}/>
   </div>`;
 };
 
-//
 const TxPage=({txs,cur,onEdit,onDelete})=>{
   const [filter,setFilter]=useState('all');
   const [catF,setCatF]=useState('all');
   const [search,setSearch]=useState('');
-  const shown=txs
-    .filter(t=>filter==='all'||t.type===filter)
-    .filter(t=>catF==='all'||t.cat===catF)
-    .filter(t=>!search||[t.desc,getC(t.cat).l].join(' ').toLowerCase().includes(search.toLowerCase()))
-    .sort((a,b)=>b.date.localeCompare(a.date));
+  const shown=txs.filter(t=>filter==='all'||t.type===filter).filter(t=>catF==='all'||t.cat===catF).filter(t=>!search||[t.desc,getC(t.cat).l,t.note].filter(Boolean).join(' ').toLowerCase().includes(search.toLowerCase())).sort((a,b)=>b.date.localeCompare(a.date));
   const grouped=shown.reduce((acc,t)=>{const k=dayKey(t.date);if(!acc[k])acc[k]=[];acc[k].push(t);return acc},{});
   const total=shown.reduce((s,t)=>s+(t.type==='expense'?-1:1)*t.amount,0);
-
   return html`<div class="p-screen">
-    <div style=${{marginBottom:18}}>
-      <h1 class="section-title" style=${{fontSize:26,marginBottom:2}}>Mes transactions 💳</h1>
-      <p style=${{fontSize:13,color:'var(--muted)',fontWeight:500}}>${txs.length} au total · Solde filtre: <strong style=${{color:total>=0?'var(--mint)':'var(--rose)'}}>${total>=0?'+':''}${fmtAmt(total,cur)}</strong></p>
+    <div style=${{marginBottom:16}}>
+      <h1 class="serif" style=${{fontSize:28,fontWeight:700,marginBottom:2}}>Mes transactions</h1>
+      <p style=${{fontSize:13,color:'var(--muted)',fontWeight:600}}>${txs.length} total · <span style=${{color:total>=0?'var(--mint)':'var(--rose)',fontWeight:800}}>${total>=0?'+':''}${fmtAmt(total,cur)}</span></p>
     </div>
     <div class="seg" style=${{marginBottom:12}}>
       ${[['all','Tout'],['expense','💸 Dépenses'],['income','💰 Revenus']].map(([v,l])=>html`<button key=${v} class=${`seg-btn ${filter===v?'active':''}`} onClick=${()=>setFilter(v)}>${l}</button>`)}
@@ -509,38 +472,27 @@ const TxPage=({txs,cur,onEdit,onDelete})=>{
       <button class=${`chip ${catF==='all'?'active':''}`} onClick=${()=>setCatF('all')}>Tout</button>
       ${CATS.filter(c=>txs.some(t=>t.cat===c.k)).map(c=>html`<button key=${c.k} class=${`chip ${catF===c.k?'active':''}`} onClick=${()=>setCatF(c.k)}>${c.e} ${c.l}</button>`)}
     </div>
-    ${shown.length===0?html`<div style=${{textAlign:'center',padding:'50px 0',color:'var(--light)'}}>
+    ${shown.length===0?html`<div style=${{textAlign:'center',padding:'50px 0'}}>
       <div style=${{fontSize:44,marginBottom:10}}>🔍</div>
-      <div style=${{fontSize:14,fontWeight:600,color:'var(--muted)'}}>Aucune transaction trouvée</div>
-    </div>`:
-    Object.entries(grouped).map(([day,items])=>html`<div key=${day}>
+      <div style=${{fontSize:14,fontWeight:700,color:'var(--muted)'}}>Aucune transaction</div>
+    </div>`:Object.entries(grouped).map(([day,items])=>html`<div key=${day}>
       <div class="date-sep">${day}</div>
       <div class="card" style=${{padding:'4px 16px',marginBottom:8}}>
-        ${items.map((t,i)=>{
-          const c=getC(t.cat);
-          return html`<div key=${t.id} class="tx-row" onClick=${()=>onEdit(t)}>
-            <div class="cat-icon" style=${{background:c.g,boxShadow:`0 3px 10px ${c.c}33`}}>
-              <span style=${{filter:'brightness(0) invert(1)'}}>${c.e}</span>
-            </div>
-            <div style=${{flex:1,minWidth:0}}>
-              <div style=${{fontSize:14,fontWeight:700,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>${t.desc||c.l}</div>
-              <div style=${{fontSize:11,color:'var(--muted)',fontWeight:500}}>${c.l}</div>
-            </div>
-            <div style=${{display:'flex',flexDirection:'column',alignItems:'flex-end',gap:4}}>
-              <div style=${{fontSize:15,fontWeight:800,color:t.type==='income'?'var(--mint)':'var(--rose)',fontFamily:"'Playfair Display',serif"}}>
-                ${t.type==='income'?'+':'-'}${fmtAmt(t.amount,cur)}
-              </div>
-              <button onClick=${e=>{e.stopPropagation();onDelete(t.id)}} style=${{background:'none',border:'none',cursor:'pointer',fontSize:14,color:'var(--light)',padding:0}}>🗑</button>
-            </div>
-          </div>`;
-        })}
-      </div>
-    </div>`)}
+        ${items.map(t=>{const c=getC(t.cat);return html`<div key=${t.id} class="tx-row" onClick=${()=>onEdit(t)}>
+          <div class="cat-icon" style=${{background:c.g,boxShadow:`0 3px 10px ${c.c}33`}}><span style=${{filter:'brightness(0) invert(1)'}}>${c.e}</span></div>
+          <div style=${{flex:1,minWidth:0}}>
+            <div style=${{fontSize:14,fontWeight:700,color:'var(--text)',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>${t.desc||c.l}${t.recur?html`<span style=${{fontSize:11,marginLeft:4}}>🔁</span>`:''}</div>
+            <div style=${{fontSize:11,color:'var(--muted)',fontWeight:600}}>${c.l}${t.note?` · ${t.note}`:''}</div>
+          </div>
+          <div style=${{display:'flex',flexDirection:'column',alignItems:'flex-end',gap:3}}>
+            <div class="serif" style=${{fontSize:15,fontWeight:700,color:t.type==='income'?'var(--mint)':'var(--rose)'}}>${t.type==='income'?'+':'-'}${fmtAmt(t.amount,cur)}</div>
+            <button onClick=${e=>{e.stopPropagation();onDelete(t.id)}} style=${{background:'none',border:'none',cursor:'pointer',fontSize:13,color:'var(--light)',padding:0}}>🗑</button>
+          </div>
+        </div>`;})}</div>`)}
     <div style=${{height:8}}/>
   </div>`;
 };
 
-//
 const BudgetPage=({txs,budgets,cur,onSaveBudget})=>{
   const [editCat,setEditCat]=useState(null);
   const [editAmt,setEditAmt]=useState('');
@@ -549,160 +501,195 @@ const BudgetPage=({txs,budgets,cur,onSaveBudget})=>{
   const totalBudget=Object.values(budgets).reduce((s,v)=>s+v,0);
   const totalSpent=Object.values(spentByCat).reduce((s,v)=>s+v,0);
   const pctTotal=totalBudget>0?Math.min(totalSpent/totalBudget*100,100):0;
-
   return html`<div class="p-screen">
-    <h1 class="section-title" style=${{fontSize:26,marginBottom:2}}>Mon Budget 📊</h1>
-    <p style=${{fontSize:13,color:'var(--muted)',fontWeight:500,marginBottom:18}}>Clique sur une catégorie pour définir ton budget</p>
-    ${totalBudget>0&&html`<div class="fu card" style=${{padding:'18px 18px',marginBottom:18,background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',border:'none',boxShadow:'0 8px 28px var(--rose-glow)'}}>
-      <div style=${{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:12}}>
+    <h1 class="serif" style=${{fontSize:28,fontWeight:700,marginBottom:4}}>Mon budget 📊</h1>
+    <p style=${{fontSize:13,color:'var(--muted)',fontWeight:600,marginBottom:16}}>Appuie pour définir un budget par catégorie</p>
+    ${totalBudget>0&&html`<div class="fu card" style=${{padding:'16px 18px',marginBottom:16,background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',border:'none',boxShadow:'0 8px 28px var(--rose-glow)'}}>
+      <div style=${{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:10}}>
         <div>
-          <div style=${{fontSize:11,fontWeight:700,color:'rgba(255,255,255,.7)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:4}}>Budget global</div>
-          <div style=${{fontSize:26,fontWeight:900,color:'#fff',fontFamily:"'Playfair Display',serif"}}>${fmtAmt(totalSpent,cur)} <span style=${{fontSize:14,fontWeight:600,opacity:.7}}>/ ${fmtAmt(totalBudget,cur)}</span></div>
+          <div style=${{fontSize:11,fontWeight:800,color:'rgba(255,255,255,.7)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:4}}>Budget global</div>
+          <div class="serif" style=${{fontSize:24,fontWeight:700,color:'#fff'}}>${fmtAmt(totalSpent,cur)} <span style=${{fontSize:14,opacity:.7}}>/ ${fmtAmt(totalBudget,cur)}</span></div>
         </div>
-        <div style=${{fontSize:22,fontWeight:900,color:'rgba(255,255,255,.9)',fontFamily:"'Playfair Display',serif"}}>${Math.round(pctTotal)}%</div>
+        <div class="serif" style=${{fontSize:24,fontWeight:700,color:'rgba(255,255,255,.9)'}}>${Math.round(pctTotal)}%</div>
       </div>
       <div style=${{background:'rgba(255,255,255,.2)',borderRadius:50,height:8}}>
-        <div style=${{background:'rgba(255,255,255,.9)',borderRadius:50,height:8,width:`${pctTotal}%`,transition:'width .8s ease',boxShadow:'0 0 10px rgba(255,255,255,.4)'}}/>
+        <div style=${{background:'rgba(255,255,255,.9)',borderRadius:50,height:8,width:`${pctTotal}%`,transition:'width .9s ease',boxShadow:'0 0 10px rgba(255,255,255,.4)'}}/>
       </div>
     </div>`}
-    <div style=${{display:'flex',flexDirection:'column',gap:12}}>
-      ${CATS.filter(c=>c.t==='expense').map(c=>{
-        const spent=spentByCat[c.k]||0;
-        const budget=budgets[c.k]||0;
+    <div style=${{display:'flex',flexDirection:'column',gap:10}}>
+      ${CATS.filter(c=>c.t==='expense').map((c,i)=>{
+        const spent=spentByCat[c.k]||0,budget=budgets[c.k]||0;
         const pct=budget>0?Math.min(spent/budget*100,100):0;
         const over=budget>0&&spent>budget;
-        return html`<div key=${c.k} class="card fu" style=${{padding:'14px 16px',cursor:'pointer',WebkitTapHighlightColor:'transparent',animationDelay:`${CATS.indexOf(c)*30}ms`}}
-          onClick=${()=>{setEditCat(c.k);setEditAmt(budget?String(budget):'');}}>
-          <div style=${{display:'flex',alignItems:'center',gap:12,marginBottom:budget?10:0}}>
-            <div style=${{width:42,height:42,borderRadius:12,background:c.g,display:'flex',alignItems:'center',justifyContent:'center',fontSize:20,flexShrink:0,boxShadow:`0 4px 12px ${c.c}33`}}>
-              <span style=${{filter:'brightness(0) invert(1)'}}>${c.e}</span>
-            </div>
+        return html`<div key=${c.k} class="fu card" style=${{padding:'13px 15px',cursor:'pointer',animationDelay:`${i*25}ms`}} onClick=${()=>{setEditCat(c.k);setEditAmt(budget?String(budget):'');}}>
+          <div style=${{display:'flex',alignItems:'center',gap:11,marginBottom:budget?10:0}}>
+            <div style=${{width:40,height:40,borderRadius:12,background:c.g,display:'flex',alignItems:'center',justifyContent:'center',fontSize:19,flexShrink:0,boxShadow:`0 3px 10px ${c.c}33`}}><span style=${{filter:'brightness(0) invert(1)'}}>${c.e}</span></div>
             <div style=${{flex:1}}>
               <div style=${{fontSize:14,fontWeight:700,color:'var(--text)'}}>${c.l}</div>
-              <div style=${{fontSize:12,fontWeight:500,color:over?'var(--rose)':'var(--muted)'}}>
-                ${budget>0?html`${fmtAmt(spent,cur)} ${over?html`<span style=${{fontWeight:800}}>⚠️ dépassé!</span>`:'/'} ${fmtAmt(budget,cur)}`:'Appuie pour définir un budget'}
+              <div style=${{fontSize:11,fontWeight:700,color:over?'var(--rose)':'var(--muted)'}}>
+                ${budget>0?`${fmtAmt(spent,cur)} / ${fmtAmt(budget,cur)}${over?' ⚠️ dépassé!':''}`:html`<span style=${{color:'var(--light)'}}>Appuie pour définir</span>`}
               </div>
             </div>
-            ${budget>0?html`<div style=${{fontSize:12,fontWeight:800,color:over?'var(--rose)':'var(--violet)'}}>${Math.round(pct)}%</div>`:''}
-            <div style=${{fontSize:14,color:'var(--light)'}}>›</div>
+            ${budget>0&&html`<div style=${{fontSize:12,fontWeight:800,color:over?'var(--rose)':'var(--violet)'}}>${Math.round(pct)}%</div>`}
+            <span style=${{color:'var(--light)',fontSize:14}}>›</span>
           </div>
-          ${budget>0&&html`<div class="prog-track">
-            <div class="prog-fill" style=${{width:`${pct}%`,background:over?'linear-gradient(90deg,var(--rose),#FF8C6B)':c.g,'--w':`${pct}%`}}/>
-          </div>`}
+          ${budget>0&&html`<div class="prog-track"><div class="prog-fill" style=${{width:`${pct}%`,background:over?'linear-gradient(90deg,var(--rose),var(--peach))':c.g}}/></div>`}
         </div>`;
       })}
     </div>
-    ${editCat&&html`<${Sheet} title=${`Budget — ${getC(editCat).e} ${getC(editCat).l}`} onClose=${()=>setEditCat(null)}
-      action=${()=>{onSaveBudget(editCat,parseFloat(editAmt)||0);setEditCat(null);}} actionLabel="Enregistrer">
-      <${FInput} label="Montant mensuel" value=${editAmt} onChange=${setEditAmt} type="number" prefix=${cur} placeholder="ex: 150"/>
+    ${editCat&&html`<${Sheet} title=${`${getC(editCat).e} ${getC(editCat).l}`} onClose=${()=>setEditCat(null)} action=${()=>{onSaveBudget(editCat,parseFloat(editAmt)||0);setEditCat(null);}} actionLabel="Enregistrer">
+      <${FInput} label="Budget mensuel" value=${editAmt} onChange=${setEditAmt} type="number" prefix=${cur} placeholder="ex: 150"/>
       <button class="btn btn-danger btn-sm" style=${{width:'100%',marginBottom:8}} onClick=${()=>{onSaveBudget(editCat,0);setEditCat(null);}}>Supprimer ce budget</button>
     </${Sheet}>`}
     <div style=${{height:8}}/>
   </div>`;
 };
 
-//
-const SavingsPage=({savings,cur,onSave,onDelete,onContrib})=>{
-  const [addOpen,setAddOpen]=useState(false);
+const SavingsPage=({savings,cur,wishlist,onSaveGoal,onDeleteGoal,onContrib,onSaveWish,onDeleteWish,onToggleWish})=>{
+  const [tab,setTab]=useState('savings');
+  const [addGoal,setAddGoal]=useState(false);
   const [editGoal,setEditGoal]=useState(null);
   const [contribGoal,setContribGoal]=useState(null);
   const [contribAmt,setContribAmt]=useState('');
-  const [form,setForm]=useState({name:'',target:'',emoji:'🎯',color:'#FF1F6E',deadline:''});
-  const GOAL_EMOJIS=['🎯','✈️','🏠','🚗','💻','👗','💍','🎓','🏖️','💄','📱','🛍️','🌸','💎','🐱','🎪'];
-  const GOAL_COLORS=['#FF1F6E','#9B5DE5','#FF8C6B','#00D9A6','#F5A623','#4FACFE','#F472B6','#10B981'];
+  const [addWish,setAddWish]=useState(false);
+  const [form,setForm]=useState({name:'',target:'',emoji:'💎',color:'#E0176C',deadline:''});
+  const [wishForm,setWishForm]=useState({name:'',price:'',emoji:'🛍️',prio:'med',link:''});
+  const EMOJIS=['💎','✈️','🏠','🚗','💻','👗','💍','🎓','🏖️','💄','📱','🛍️','🌸','💫','🎪','🐱'];
+  const COLORS=['#E0176C','#8B47E8','#FF7D5C','#00CFA8','#F0A500','#4FACFE','#F472B6','#10B981'];
   const totalSaved=savings.reduce((s,g)=>s+g.current,0);
   const totalTarget=savings.reduce((s,g)=>s+g.target,0);
+  const wishTotal=wishlist.filter(w=>!w.done).reduce((s,w)=>s+(parseFloat(w.price)||0),0);
 
   return html`<div class="p-screen">
-    <div style=${{display:'flex',alignItems:'flex-start',justifyContent:'space-between',marginBottom:18}}>
-      <div>
-        <h1 class="section-title" style=${{fontSize:26,marginBottom:2}}>Mon Épargne 🐷</h1>
-        <p style=${{fontSize:13,color:'var(--muted)',fontWeight:500}}>Atteins tes objectifs un par un</p>
-      </div>
-      <button class="btn btn-rose btn-sm" style=${{flexShrink:0}} onClick=${()=>{setForm({name:'',target:'',emoji:'🎯',color:'#FF1F6E',deadline:''});setEditGoal(null);setAddOpen(true);}}>+ Objectif</button>
+    <h1 class="serif" style=${{fontSize:28,fontWeight:700,marginBottom:14}}>Épargne & Envies 💎</h1>
+    <div class="seg" style=${{marginBottom:18}}>
+      <button class=${`seg-btn ${tab==='savings'?'active':''}`} onClick=${()=>setTab('savings')}>💎 Objectifs</button>
+      <button class=${`seg-btn ${tab==='wish'?'active':''}`} onClick=${()=>setTab('wish')}>🛍️ Wishlist</button>
     </div>
-    ${savings.length>0&&html`<div class="fu card" style=${{padding:'16px 18px',marginBottom:18,background:'var(--hero3)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',border:'none',boxShadow:'0 8px 28px rgba(245,166,35,.35)'}}>
-      <div style=${{fontSize:11,fontWeight:700,color:'rgba(255,255,255,.75)',textTransform:'uppercase',letterSpacing:'.1em',marginBottom:4}}>Total épargné</div>
-      <div style=${{fontSize:32,fontWeight:900,color:'#fff',fontFamily:"'Playfair Display',serif",marginBottom:2}}>${fmtAmt(totalSaved,cur)}</div>
-      <div style=${{fontSize:13,color:'rgba(255,255,255,.7)',fontWeight:500}}>sur ${fmtAmt(totalTarget,cur)} d'objectifs</div>
-    </div>`}
-    ${savings.length===0?html`<div class="card" style=${{padding:'40px 20px',textAlign:'center'}}>
-      <div style=${{fontSize:60,marginBottom:10,animation:'float 3s ease-in-out infinite',display:'block'}}>🐷</div>
-      <div style=${{fontSize:15,fontWeight:700,color:'var(--text)',marginBottom:6}}>Aucun objectif</div>
-      <div style=${{fontSize:13,color:'var(--muted)',marginBottom:20,lineHeight:1.65}}>Crée ton premier objectif d'épargne !<br/>Voyage, achat, projets…</div>
-      <button class="btn btn-rose btn-sm" onClick=${()=>setAddOpen(true)}>✨ Créer un objectif</button>
-    </div>`:html`<div style=${{display:'flex',flexDirection:'column',gap:12}}>
-      ${savings.map((g,i)=>{
-        const pct=Math.min(g.current/g.target*100,100);
-        const done=pct>=100;
-        return html`<div key=${g.id} class="fu card" style=${{padding:'16px 18px',animationDelay:`${i*70}ms`}}>
-          <div style=${{display:'flex',alignItems:'center',gap:14,marginBottom:12}}>
+
+    ${tab==='savings'&&html`<div>
+      <div style=${{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:14}}>
+        <div>
+          <div style=${{fontSize:13,fontWeight:700,color:'var(--muted)'}}>Total épargné</div>
+          <div class="serif" style=${{fontSize:22,fontWeight:700,color:'var(--gold)'}}>${fmtAmt(totalSaved,cur)}</div>
+        </div>
+        <button class="btn btn-rose btn-sm" onClick=${()=>{setForm({name:'',target:'',emoji:'💎',color:'#E0176C',deadline:''});setEditGoal(null);setAddGoal(true);}}>+ Objectif</button>
+      </div>
+      ${savings.length===0?html`<div class="card" style=${{padding:'38px 20px',textAlign:'center'}}>
+        <div style=${{fontSize:60,marginBottom:10,animation:'float 3s ease-in-out infinite',display:'block'}}>💎</div>
+        <div style=${{fontSize:15,fontWeight:800,color:'var(--text)',marginBottom:6}}>Aucun objectif</div>
+        <div style=${{fontSize:13,color:'var(--muted)',marginBottom:18,lineHeight:1.6}}>Crée ton premier objectif<br/>d'épargne !</div>
+        <button class="btn btn-rose btn-sm" onClick=${()=>setAddGoal(true)}>✨ Créer</button>
+      </div>`:html`<div style=${{display:'flex',flexDirection:'column',gap:12}}>
+        ${savings.map((g,i)=>{const pct=Math.min(g.current/g.target*100,100);const done=pct>=100;return html`<div key=${g.id} class="fu card" style=${{padding:'16px 16px',animationDelay:`${i*60}ms`}}>
+          <div style=${{display:'flex',alignItems:'center',gap:13,marginBottom:12}}>
             <div style=${{position:'relative',flexShrink:0}}>
-              <${SavingsRing} pct=${pct} color=${g.color} size=${72}/>
+              <${SavingsRing} pct=${pct} color=${g.color} size=${70}/>
               <div style=${{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',fontSize:24}}>
                 ${done?'🎉':g.emoji}
               </div>
             </div>
             <div style=${{flex:1}}>
               <div style=${{fontSize:16,fontWeight:800,color:'var(--text)',marginBottom:2}}>${g.name}</div>
-              <div style=${{fontSize:13,fontWeight:700,color:g.color}}>${fmtAmt(g.current,cur)} <span style=${{color:'var(--muted)',fontWeight:500}}>/ ${fmtAmt(g.target,cur)}</span></div>
-              ${g.deadline&&html`<div style=${{fontSize:11,color:'var(--light)',fontWeight:600,marginTop:2}}>🗓 ${fmtDate(g.deadline)}</div>`}
+              <div class="serif" style=${{fontSize:14,fontWeight:700,color:g.color}}>${fmtAmt(g.current,cur)} <span style=${{color:'var(--muted)',fontWeight:600,fontSize:13}}>/ ${fmtAmt(g.target,cur)}</span></div>
+              ${g.deadline&&html`<div style=${{fontSize:11,color:'var(--light)',fontWeight:700,marginTop:2}}>🗓 ${fmtDate(g.deadline)}</div>`}
             </div>
-            <div style=${{display:'flex',flexDirection:'column',gap:5,alignItems:'flex-end'}}>
-              <div style=${{fontSize:13,fontWeight:800,color:g.color}}>${Math.round(pct)}%</div>
-              ${done&&html`<span style=${{fontSize:11,fontWeight:800,background:'#D1FAE5',color:'var(--mint)',padding:'2px 8px',borderRadius:50}}>✓ Atteint!</span>`}
-            </div>
+            <div class="serif" style=${{fontSize:18,fontWeight:700,color:g.color}}>${Math.round(pct)}%</div>
+          </div>
+          <div class="prog-track" style=${{marginBottom:12}}>
+            <div class="prog-fill" style=${{width:`${pct}%`,background:done?'linear-gradient(90deg,var(--mint),#34D399)':g.color}}/>
           </div>
           <div style=${{display:'flex',gap:8}}>
             <button class="btn btn-rose btn-sm" style=${{flex:2}} onClick=${()=>{setContribGoal(g);setContribAmt('');}}>+ Alimenter</button>
-            <button class="btn btn-ghost btn-sm" style=${{flex:1}} onClick=${()=>{setForm({name:g.name,target:String(g.target),emoji:g.emoji,color:g.color,deadline:g.deadline||''});setEditGoal(g);setAddOpen(true);}}>✏️</button>
-            <button class="btn btn-danger btn-sm" style=${{flex:1}} onClick=${()=>onDelete(g.id)}>🗑</button>
+            <button class="btn btn-ghost btn-sm" style=${{flex:1}} onClick=${()=>{setForm({name:g.name,target:String(g.target),emoji:g.emoji,color:g.color,deadline:g.deadline||''});setEditGoal(g);setAddGoal(true);}}>✏️</button>
+            <button class="btn btn-danger btn-sm" style=${{flex:1}} onClick=${()=>onDeleteGoal(g.id)}>🗑</button>
           </div>
-        </div>`;
-      })}
+        </div>`;})}</div>`}
     </div>`}
-    ${addOpen&&html`<${Sheet} title=${editGoal?'Modifier l\'objectif':'Nouvel objectif 🎯'} onClose=${()=>setAddOpen(false)}
-      action=${()=>{
-        const t=parseFloat(form.target);
-        if(!form.name.trim()||!t||t<=0)return;
-        onSave(editGoal?{...editGoal,...form,target:t}:{id:mkId(),...form,target:t,current:0,createdAt:Date.now()});
-        setAddOpen(false);
-      }} actionLabel=${editGoal?'Modifier':'Créer l\'objectif'}>
-      <div class="inp-wrap">
-        <label class="lbl">Nom de l'objectif</label>
-        <input class="inp" value=${form.name} onInput=${e=>setForm(p=>({...p,name:e.target.value}))} placeholder="ex : Voyage à Ibiza ✈️"/>
+
+    ${tab==='wish'&&html`<div>
+      <div style=${{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:14}}>
+        <div>
+          <div style=${{fontSize:13,fontWeight:700,color:'var(--muted)'}}>Total à prévoir</div>
+          <div class="serif" style=${{fontSize:22,fontWeight:700,color:'var(--violet)'}}>${fmtAmt(wishTotal,cur)}</div>
+        </div>
+        <button class="btn btn-rose btn-sm" onClick=${()=>{setWishForm({name:'',price:'',emoji:'🛍️',prio:'med',link:''});setAddWish(true);}}>+ Envie</button>
       </div>
+      ${wishlist.length===0?html`<div class="card" style=${{padding:'38px 20px',textAlign:'center'}}>
+        <div style=${{fontSize:60,marginBottom:10,animation:'float 3s ease-in-out infinite',display:'block'}}>🛍️</div>
+        <div style=${{fontSize:15,fontWeight:800,color:'var(--text)',marginBottom:6}}>Aucune envie</div>
+        <div style=${{fontSize:13,color:'var(--muted)',marginBottom:18,lineHeight:1.6}}>Ajoute les choses que<br/>tu souhaites t'offrir !</div>
+        <button class="btn btn-rose btn-sm" onClick=${()=>setAddWish(true)}>✨ Ajouter</button>
+      </div>`:html`<div style=${{display:'flex',flexDirection:'column',gap:10}}>
+        ${[...wishlist].sort((a,b)=>({high:0,med:1,low:2}[a.prio]||1)-({high:0,med:1,low:2}[b.prio]||1)).map((w,i)=>{
+          const p=getPrio(w.prio);
+          return html`<div key=${w.id} class="fu wish-card" style=${{opacity:w.done?.55:1,animationDelay:`${i*50}ms`}}>
+            <div style=${{fontSize:28,flexShrink:0,opacity:w.done?.5:1}}>${w.emoji}</div>
+            <div style=${{flex:1,minWidth:0}}>
+              <div style=${{fontSize:14,fontWeight:800,color:'var(--text)',textDecoration:w.done?'line-through':'none',marginBottom:3}}>${w.name}</div>
+              <div style=${{display:'flex',alignItems:'center',gap:6}}>
+                ${w.price&&html`<span class="serif" style=${{fontSize:14,fontWeight:700,color:'var(--rose)'}}>${fmtAmt(w.price,cur)}</span>`}
+                <span style=${{fontSize:10,fontWeight:800,padding:'2px 8px',borderRadius:50,background:p.bg,color:p.c}}>${p.l}</span>
+              </div>
+            </div>
+            <div style=${{display:'flex',flexDirection:'column',gap:6,alignItems:'flex-end'}}>
+              <button onClick=${()=>onToggleWish(w.id)} style=${{background:w.done?'var(--mint-light)':'var(--rose-light)',border:'none',borderRadius:10,width:32,height:32,display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer',fontSize:16}}>${w.done?'✅':'☐'}</button>
+              <button onClick=${()=>onDeleteWish(w.id)} style=${{background:'none',border:'none',cursor:'pointer',fontSize:14,color:'var(--light)',padding:0}}>🗑</button>
+            </div>
+          </div>`;
+        })}</div>`}
+    </div>`}
+
+    ${addGoal&&html`<${Sheet} title=${editGoal?'Modifier':'Nouvel objectif 💎'} onClose=${()=>setAddGoal(false)} action=${()=>{
+      const t=parseFloat(form.target);if(!form.name.trim()||!t||t<=0)return;
+      onSaveGoal(editGoal?{...editGoal,...form,target:t}:{id:mkId(),...form,target:t,current:0,createdAt:Date.now()});
+      setAddGoal(false);
+    }} actionLabel=${editGoal?'Modifier':'Créer'}>
+      <${FInput} label="Nom de l'objectif" value=${form.name} onChange=${v=>setForm(p=>({...p,name:v}))} placeholder="ex : Voyage Ibiza ✈️"/>
       <${FInput} label="Montant cible" value=${form.target} onChange=${v=>setForm(p=>({...p,target:v}))} type="number" prefix=${cur} placeholder="0.00"/>
       <${FInput} label="Date limite (optionnel)" value=${form.deadline} onChange=${v=>setForm(p=>({...p,deadline:v}))} type="date"/>
       <div class="inp-wrap">
         <label class="lbl">Emoji</label>
-        <div style=${{display:'flex',gap:8,flexWrap:'wrap'}}>
-          ${GOAL_EMOJIS.map(e=>html`<button key=${e} onClick=${()=>setForm(p=>({...p,emoji:e}))}
-            style=${{fontSize:24,padding:'8px',borderRadius:10,border:`2px solid ${form.emoji===e?'var(--rose)':'var(--border)'}`,background:form.emoji===e?'var(--rose-light)':'transparent',cursor:'pointer'}}>${e}</button>`)}
+        <div style=${{display:'flex',gap:7,flexWrap:'wrap'}}>
+          ${EMOJIS.map(e=>html`<button key=${e} onClick=${()=>setForm(p=>({...p,emoji:e}))} style=${{fontSize:22,padding:'8px',borderRadius:10,border:`2px solid ${form.emoji===e?'var(--rose)':'var(--border)'}`,background:form.emoji===e?'var(--rose-light)':'transparent',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>${e}</button>`)}
         </div>
       </div>
-      <div class="inp-wrap">
+      <div class="inp-wrap" style=${{marginBottom:0}}>
         <label class="lbl">Couleur</label>
         <div style=${{display:'flex',gap:8}}>
-          ${GOAL_COLORS.map(c=>html`<button key=${c} onClick=${()=>setForm(p=>({...p,color:c}))}
-            style=${{width:30,height:30,borderRadius:'50%',background:c,border:`3px solid ${form.color===c?'var(--text)':'transparent'}`,cursor:'pointer'}}/>` )}
+          ${COLORS.map(c=>html`<button key=${c} onClick=${()=>setForm(p=>({...p,color:c}))} style=${{width:32,height:32,borderRadius:'50%',background:c,border:`3px solid ${form.color===c?'var(--text)':'transparent'}`,cursor:'pointer',WebkitTapHighlightColor:'transparent'}}/>`)}
         </div>
       </div>
     </${Sheet}>`}
-    ${contribGoal&&html`<${Sheet} title=${`Alimenter — ${contribGoal.emoji} ${contribGoal.name}`} onClose=${()=>setContribGoal(null)}
-      action=${()=>{const n=parseFloat(contribAmt);if(n>0){onContrib(contribGoal.id,n);setContribGoal(null);}}} actionLabel="Ajouter">
+
+    ${contribGoal&&html`<${Sheet} title=${`💎 ${contribGoal.name}`} onClose=${()=>setContribGoal(null)} action=${()=>{const n=parseFloat(contribAmt);if(n>0){onContrib(contribGoal.id,n);setContribGoal(null);}}} actionLabel="Ajouter">
       <${FInput} label="Montant à ajouter" value=${contribAmt} onChange=${setContribAmt} type="number" prefix=${cur} placeholder="0.00"/>
-      <div style=${{background:'var(--gold-light)',borderRadius:14,padding:'13px 15px',marginBottom:16}}>
-        <div style=${{fontSize:13,fontWeight:600,color:'var(--gold)'}}>Épargne actuelle : <strong>${fmtAmt(contribGoal.current,cur)}</strong></div>
-        <div style=${{fontSize:13,fontWeight:600,color:'var(--gold)'}}>Objectif : <strong>${fmtAmt(contribGoal.target,cur)}</strong></div>
-        <div style=${{fontSize:13,fontWeight:600,color:'var(--gold)'}}>Reste : <strong>${fmtAmt(Math.max(contribGoal.target-contribGoal.current,0),cur)}</strong></div>
+      <div style=${{background:'var(--gold-light)',borderRadius:14,padding:'13px 15px',marginBottom:14}}>
+        <div style=${{fontSize:13,fontWeight:700,color:'var(--gold)',marginBottom:4}}>Épargne actuelle : <strong>${fmtAmt(contribGoal.current,cur)}</strong></div>
+        <div style=${{fontSize:13,fontWeight:700,color:'var(--gold)'}}>Reste : <strong>${fmtAmt(Math.max(contribGoal.target-contribGoal.current,0),cur)}</strong></div>
+      </div>
+    </${Sheet}>`}
+
+    ${addWish&&html`<${Sheet} title="Ajouter une envie 🛍️" onClose=${()=>setAddWish(false)} action=${()=>{
+      if(!wishForm.name.trim())return;
+      onSaveWish({id:mkId(),...wishForm,done:false,createdAt:Date.now()});
+      setAddWish(false);
+    }} actionLabel="Ajouter">
+      <${FInput} label="Nom" value=${wishForm.name} onChange=${v=>setWishForm(p=>({...p,name:v}))} placeholder="ex : Sac Jacquemus, AirPods…"/>
+      <${FInput} label="Prix estimé" value=${wishForm.price} onChange=${v=>setWishForm(p=>({...p,price:v}))} type="number" prefix=${cur} placeholder="0.00"/>
+      <${FInput} label="Lien (optionnel)" value=${wishForm.link} onChange=${v=>setWishForm(p=>({...p,link:v}))} placeholder="https://…"/>
+      <${FSelect} label="Priorité" value=${wishForm.prio} onChange=${v=>setWishForm(p=>({...p,prio:v}))} options=${PRIOS.map(p=>({v:p.k,l:p.l}))}/>
+      <div class="inp-wrap" style=${{marginBottom:0}}>
+        <label class="lbl">Emoji</label>
+        <div style=${{display:'flex',gap:7,flexWrap:'wrap'}}>
+          ${['🛍️','👗','💄','👟','💻','📱','✈️','🎁','💍','🧴','👜','🌸','🎬','🎮','📚','🏠'].map(e=>html`<button key=${e} onClick=${()=>setWishForm(p=>({...p,emoji:e}))} style=${{fontSize:22,padding:'8px',borderRadius:10,border:`2px solid ${wishForm.emoji===e?'var(--rose)':'var(--border)'}`,background:wishForm.emoji===e?'var(--rose-light)':'transparent',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>${e}</button>`)}
+        </div>
       </div>
     </${Sheet}>`}
     <div style=${{height:8}}/>
   </div>`;
 };
 
-//
 const ChatPage=({txs,savings,budgets,cur,apiKey,name})=>{
   const [msgs,setMsgs]=useState(()=>LS.get('fin-chat',[]));
   const [input,setInput]=useState('');
@@ -711,219 +698,241 @@ const ChatPage=({txs,savings,budgets,cur,apiKey,name})=>{
   const monthTxs=txs.filter(t=>isThisMonth(t.date));
   const income=monthTxs.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
   const expense=monthTxs.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
-  const topCats=Object.entries(monthTxs.filter(t=>t.type==='expense').reduce((acc,t)=>{acc[t.cat]=(acc[t.cat]||0)+t.amount;return acc},{}))
-    .sort((a,b)=>b[1]-a[1]).slice(0,4).map(([k,v])=>`${getC(k).e}${getC(k).l}:${v.toFixed(0)}${cur}`).join(', ');
+  const topCats=Object.entries(monthTxs.filter(t=>t.type==='expense').reduce((acc,t)=>{acc[t.cat]=(acc[t.cat]||0)+t.amount;return acc},{})).sort((a,b)=>b[1]-a[1]).slice(0,4).map(([k,v])=>`${getC(k).e}${getC(k).l}: ${v.toFixed(0)}${cur}`).join(', ');
   const totalSaved=savings.reduce((s,g)=>s+g.current,0);
+  const sysPrompt=`Tu es Finella AI, une assistante financière personnelle bienveillante, chaleureuse et experte. Tu analyses les finances de ${name} et lui donnes des conseils personnalisés, pratiques, positifs et concrets. Tu parles en français, avec une touche amicale. Tu utilises des emojis. Tes réponses sont concises (3-5 lignes max).
 
-  const sysPrompt=`Tu es Finella AI, une assistante financière personnelle chaleureuse, bienveillante et experte en gestion de budget. Tu analyses les données financières de ${name} et tu lui donnes des conseils personnalisés, bienveillants, pratiques et concrets. Tu parles en français, avec une touche amicale et encourageante. Tu utilises des emojis pour rendre tes messages vivants.
-
-Données financières actuelles de ${name} :
-- Revenus ce mois : ${income.toFixed(2)}${cur}
-- Dépenses ce mois : ${expense.toFixed(2)}${cur}
-- Solde : ${(income-expense).toFixed(2)}${cur}
+Données financières de ${name} ce mois :
+- Revenus : ${income.toFixed(2)}${cur} | Dépenses : ${expense.toFixed(2)}${cur} | Solde : ${(income-expense).toFixed(2)}${cur}
 - Top dépenses : ${topCats||'aucune'}
 - Épargne totale : ${totalSaved.toFixed(2)}${cur}
-- Objectifs d'épargne : ${savings.map(g=>`${g.emoji}${g.name}(${g.current.toFixed(0)}/${g.target.toFixed(0)}${cur})`).join(', ')||'aucun'}
-- Transactions ce mois : ${monthTxs.length}
+- Objectifs : ${savings.map(g=>`${g.emoji}${g.name}(${g.current.toFixed(0)}/${g.target.toFixed(0)}${cur})`).join(', ')||'aucun'}
+- Nb transactions ce mois : ${monthTxs.length}`;
 
-Réponds toujours de façon personnalisée en utilisant ces données. Sois concise (3-5 phrases max par message), positive et utile.`;
-
-  useEffect(()=>{ endRef.current?.scrollIntoView({behavior:'smooth'}); },[msgs,loading]);
-  useEffect(()=>{ LS.set('fin-chat',msgs.slice(-40)); },[msgs]);
+  useEffect(()=>{endRef.current?.scrollIntoView({behavior:'smooth'})},[msgs,loading]);
+  useEffect(()=>{LS.set('fin-chat',msgs.slice(-40))},[msgs]);
 
   const send=async()=>{
     if(!input.trim()||loading)return;
     const userMsg={role:'user',content:input.trim(),id:mkId()};
     const newMsgs=[...msgs,userMsg];
-    setMsgs(newMsgs); setInput(''); setLoading(true);
+    setMsgs(newMsgs);setInput('');setLoading(true);
     if(!apiKey){
       setLoading(false);
-      setMsgs(m=>[...m,{role:'assistant',content:`Salut ${name} 💖 ! Pour que je puisse t'aider, il me faut ta clé API Anthropic. Va dans Réglages → Clé API et colle-la là. Tu peux l'obtenir sur console.anthropic.com 🌸`,id:mkId()}]);
+      setMsgs(m=>[...m,{role:'assistant',content:`Coucou ${name} 💖 ! Pour activer Finella AI, il me faut ta clé API Anthropic. Va dans l'onglet 👩 Profil → Clé API Anthropic. Tu peux la créer gratuitement sur console.anthropic.com 🌸`,id:mkId()}]);
       return;
     }
     try{
-      const res=await fetch('https://api.anthropic.com/v1/messages',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-allow-any-origin':'true'},
-        body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:sysPrompt,messages:newMsgs.map(m=>({role:m.role,content:m.content}))})
-      });
+      const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-allow-any-origin':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:600,system:sysPrompt,messages:newMsgs.map(m=>({role:m.role,content:m.content}))})});
       const data=await res.json();
-      const reply=data.content?.[0]?.text||'Désolée, je n\'ai pas pu traiter ta demande. 💔';
-      setMsgs(m=>[...m,{role:'assistant',content:reply,id:mkId()}]);
-    }catch(e){
-      setMsgs(m=>[...m,{role:'assistant',content:'Oups ! Une erreur réseau s\'est produite. Vérifie ta clé API et ta connexion 💫',id:mkId()}]);
+      setMsgs(m=>[...m,{role:'assistant',content:data.content?.[0]?.text||'Désolée, une erreur est survenue. 💔',id:mkId()}]);
+    }catch{
+      setMsgs(m=>[...m,{role:'assistant',content:'Oups ! Erreur réseau. Vérifie ta clé API et ta connexion 💫',id:mkId()}]);
     }
     setLoading(false);
   };
-
-  const SUGGESTIONS=['Analyse mes dépenses du mois 📊','Comment économiser davantage ? 💰','Où est-ce que je gaspille ? 🔍','Conseil pour atteindre mes objectifs ✨'];
+  const SUGGS=['📊 Analyse mes dépenses du mois','💰 Comment épargner davantage ?','🔍 Où est-ce que je gaspille ?','✨ Conseils pour atteindre mes objectifs'];
 
   return html`<div style=${{display:'flex',flexDirection:'column',height:'100%',overflow:'hidden'}}>
-    
-    <div style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',padding:'calc(var(--safe-top) + 14px) 18px 16px',flexShrink:0,boxShadow:'0 4px 20px var(--rose-glow)'}}>
+    <div style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',padding:'calc(var(--safe-top) + 12px) 18px 16px',flexShrink:0,boxShadow:'0 4px 22px var(--rose-glow)'}}>
       <div style=${{display:'flex',alignItems:'center',gap:12}}>
-        <div style=${{width:42,height:42,borderRadius:14,background:'rgba(255,255,255,.2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,backdropFilter:'blur(10px)'}}>💖</div>
-        <div>
-          <div style=${{fontSize:16,fontWeight:800,color:'#fff'}}>Finella AI ✨</div>
-          <div style=${{fontSize:11,color:'rgba(255,255,255,.7)',fontWeight:500}}>Ton assistante financière IA</div>
+        <div style=${{width:44,height:44,borderRadius:14,background:'rgba(255,255,255,.2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,backdropFilter:'blur(10px)'}}>💖</div>
+        <div style=${{flex:1}}>
+          <div style=${{fontSize:16,fontWeight:900,color:'#fff'}}>Finella AI ✨</div>
+          <div style=${{fontSize:11,color:'rgba(255,255,255,.7)',fontWeight:600}}>Ton assistante financière IA</div>
         </div>
-        <button onClick=${()=>setMsgs([])} style=${{marginLeft:'auto',background:'rgba(255,255,255,.15)',border:'none',borderRadius:10,padding:'6px 12px',color:'#fff',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:'inherit'}}>Effacer</button>
+        <button onClick=${()=>setMsgs([])} style=${{background:'rgba(255,255,255,.15)',border:'none',borderRadius:10,padding:'6px 12px',color:'#fff',cursor:'pointer',fontSize:12,fontWeight:800,fontFamily:'inherit'}}>Effacer</button>
       </div>
     </div>
-    
-    <div style=${{flex:1,overflowY:'auto',padding:'16px 16px 0',display:'flex',flexDirection:'column',gap:12}}>
-      ${msgs.length===0&&html`<div style=${{textAlign:'center',padding:'20px 0 10px'}}>
-        <div style=${{fontSize:52,marginBottom:8,animation:'float 3s ease-in-out infinite',display:'block'}}>🌸</div>
-        <div style=${{fontSize:16,fontWeight:700,color:'var(--text)',marginBottom:4}}>Coucou ${name} ! 👋</div>
-        <div style=${{fontSize:13,color:'var(--muted)',lineHeight:1.7,marginBottom:20}}>Je suis Finella, ton assistante financière IA.<br/>Pose-moi n'importe quelle question sur tes finances !</div>
+    <div style=${{flex:1,overflowY:'auto',padding:'16px',display:'flex',flexDirection:'column',gap:12}}>
+      ${msgs.length===0&&html`<div style=${{textAlign:'center',padding:'16px 0 8px'}}>
+        <div style=${{fontSize:54,marginBottom:6,animation:'float 3s ease-in-out infinite',display:'block'}}>🌸</div>
+        <div style=${{fontSize:16,fontWeight:800,color:'var(--text)',marginBottom:3}}>Coucou ${name} ! 👋</div>
+        <div style=${{fontSize:13,color:'var(--muted)',lineHeight:1.7,marginBottom:18,fontWeight:600}}>Je suis Finella AI, ton assistante<br/>financière personnelle !</div>
         <div style=${{display:'flex',flexDirection:'column',gap:8}}>
-          ${SUGGESTIONS.map(s=>html`<button key=${s} onClick=${()=>{setInput(s);}} style=${{background:'var(--surface)',border:'1.5px solid var(--border)',borderRadius:14,padding:'11px 14px',cursor:'pointer',fontSize:13,fontWeight:600,color:'var(--violet)',textAlign:'left',fontFamily:'inherit',WebkitTapHighlightColor:'transparent'}}>${s}</button>`)}
+          ${SUGGS.map(s=>html`<button key=${s} onClick=${()=>setInput(s)} style=${{background:'var(--surface)',border:'1.5px solid var(--border)',borderRadius:14,padding:'11px 14px',cursor:'pointer',fontSize:13,fontWeight:700,color:'var(--violet)',textAlign:'left',fontFamily:'inherit',WebkitTapHighlightColor:'transparent'}}>${s}</button>`)}
         </div>
       </div>`}
-      ${msgs.map((m,i)=>html`<div key=${m.id||i} style=${{display:'flex',justifyContent:m.role==='user'?'flex-end':'flex-start',animationDelay:`${i*30}ms`}}>
-        ${m.role==='assistant'&&html`<div style=${{width:28,height:28,borderRadius:10,background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 5s ease infinite',display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,flexShrink:0,marginRight:8,marginTop:4}}>💖</div>`}
-        <div class=${`chat-bubble ${m.role==='ai'||m.role==='assistant'?'bubble-ai':'bubble-user'}`} style=${{animationDelay:`${i*30}ms`}}>
-          ${m.content}
-        </div>
+      ${msgs.map((m,i)=>html`<div key=${m.id||i} style=${{display:'flex',justifyContent:m.role==='user'?'flex-end':'flex-start',alignItems:'flex-end',gap:8}}>
+        ${m.role==='assistant'&&html`<div style=${{width:30,height:30,borderRadius:10,background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 5s ease infinite',display:'flex',alignItems:'center',justifyContent:'center',fontSize:15,flexShrink:0}}>💖</div>`}
+        <div class=${`chat-bubble ${m.role==='assistant'?'bubble-ai':'bubble-user'}`}>${m.content}</div>
       </div>`)}
-      ${loading&&html`<div style=${{display:'flex',justifyContent:'flex-start',gap:8,alignItems:'flex-start'}}>
-        <div style=${{width:28,height:28,borderRadius:10,background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 5s ease infinite',display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,flexShrink:0,marginTop:4}}>💖</div>
+      ${loading&&html`<div style=${{display:'flex',alignItems:'flex-end',gap:8}}>
+        <div style=${{width:30,height:30,borderRadius:10,background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 5s ease infinite',display:'flex',alignItems:'center',justifyContent:'center',fontSize:15,flexShrink:0}}>💖</div>
         <div class="bubble-ai" style=${{display:'flex',gap:5,alignItems:'center',padding:'14px 18px'}}>
-          <div class="typing-dot"/><div class="typing-dot"/><div class="typing-dot"/>
+          <div class="tdot"/><div class="tdot"/><div class="tdot"/>
         </div>
       </div>`}
       <div ref=${endRef}/>
     </div>
-    
-    <div style=${{padding:'12px 16px',paddingBottom:`calc(var(--safe-bottom) + 100px)`,background:'var(--surface)',borderTop:'1px solid var(--border)',display:'flex',gap:10,flexShrink:0}}>
-      <input class="inp" value=${input} onInput=${e=>setInput(e.target.value)}
-        onKeyDown=${e=>e.key==='Enter'&&send()}
-        placeholder="Parle à Finella…" style=${{flex:1,padding:'12px 16px',fontSize:14}}/>
-      <button onClick=${send} disabled=${loading||!input.trim()} class="btn btn-rose" style=${{padding:'12px 18px',borderRadius:14,fontSize:20,flexShrink:0,opacity:(loading||!input.trim())?0.5:1}}>
-        ${loading?html`<div style=${{width:20,height:20,borderRadius:'50%',border:'3px solid rgba(255,255,255,.3)',borderTopColor:'#fff',animation:'spin .7s linear infinite'}}/>`:html`→`}
+    <div style=${{padding:'10px 14px',paddingBottom:`calc(var(--safe-bottom) + 96px)`,background:'var(--surface)',borderTop:'1px solid var(--border)',display:'flex',gap:8,flexShrink:0}}>
+      <input class="inp" value=${input} onInput=${e=>setInput(e.target.value)} onKeyDown=${e=>e.key==='Enter'&&send()} placeholder="Parle à Finella…" style=${{flex:1,padding:'12px 14px',fontSize:14}}/>
+      <button onClick=${send} style=${{width:46,height:46,borderRadius:13,background:loading||!input.trim()?'var(--border)':'var(--hero)',backgroundSize:'200% 200%',animation:!loading&&input.trim()?'gradShift 5s ease infinite':undefined,border:'none',color:'#fff',cursor:loading||!input.trim()?'default':'pointer',fontSize:19,flexShrink:0,display:'flex',alignItems:'center',justifyContent:'center',transition:'background .2s'}}>
+        ${loading?html`<div style=${{width:18,height:18,borderRadius:'50%',border:'3px solid rgba(255,255,255,.3)',borderTopColor:'#fff',animation:'spin .7s linear infinite'}}/>`:html`→`}
       </button>
     </div>
   </div>`;
 };
 
-//
-const SettingsPage=({settings,onSave,onClear})=>{
+const ProfilePage=({settings,photo,txs,savings,wishlist,onSaveSettings,onPhotoChange,onClear,navTo})=>{
   const [name,setName]=useState(settings.name);
   const [cur,setCur]=useState(settings.currency);
   const [apiKey,setApiKey]=useState(settings.apiKey||'');
   const [showKey,setShowKey]=useState(false);
+  const fileRef=useRef(null);
+  const monthTxs=txs.filter(t=>isThisMonth(t.date));
+  const totalExpense=monthTxs.filter(t=>t.type==='expense').reduce((s,t)=>s+t.amount,0);
+  const totalIncome=monthTxs.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
+  const totalSaved=savings.reduce((s,g)=>s+g.current,0);
+  const handlePhoto=e=>{
+    const file=e.target.files[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{onPhotoChange(ev.target.result);};
+    reader.readAsDataURL(file);
+  };
   return html`<div class="p-screen">
-    <h1 class="section-title" style=${{fontSize:26,marginBottom:20}}>Réglages ⚙️</h1>
-    <div class="card" style=${{padding:'18px',marginBottom:16}}>
-      <h3 style=${{fontSize:14,fontWeight:700,color:'var(--muted)',marginBottom:14,textTransform:'uppercase',letterSpacing:'.08em'}}>Mon profil</h3>
-      <${FInput} label="Prénom" value=${name} onChange=${setName} placeholder="Ton prénom"/>
-      <${FSelect} label="Devise" value=${cur} onChange=${setCur} options=${CURRENCIES.map(c=>({v:c.s,l:`${c.s} — ${c.l}`}))}/>
-      <button class="btn btn-rose btn-sm" style=${{width:'100%'}} onClick=${()=>onSave({name,currency:cur,apiKey})}>Enregistrer</button>
+    <input type="file" accept="image/*" onChange=${handlePhoto} style=${{display:'none'}} ref=${fileRef}/>
+    <div style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',margin:'-18px -16px 0',padding:'24px 20px 32px',position:'relative',overflow:'hidden'}}>
+      <div style=${{position:'absolute',top:-40,right:-40,width:160,height:160,borderRadius:'50%',background:'rgba(255,255,255,.07)'}}/>
+      <div style=${{display:'flex',flexDirection:'column',alignItems:'center',gap:12,position:'relative',zIndex:1}}>
+        <div style=${{position:'relative'}}>
+          <div style=${{width:90,height:90,borderRadius:'50%',border:'3px solid rgba(255,255,255,.5)',overflow:'hidden',display:'flex',alignItems:'center',justifyContent:'center',background:'rgba(255,255,255,.2)',cursor:'pointer'}} onClick=${()=>fileRef.current?.click()}>
+            ${photo?html`<img src=${photo} style=${{width:'100%',height:'100%',objectFit:'cover'}}/>`:html`<span style=${{fontSize:36,color:'#fff',fontWeight:900}}>${(settings.name||'?').slice(0,2).toUpperCase()}</span>`}
+          </div>
+          <button onClick=${()=>fileRef.current?.click()} style=${{position:'absolute',bottom:0,right:0,width:28,height:28,borderRadius:'50%',background:'#fff',border:'none',cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,boxShadow:'0 2px 8px rgba(0,0,0,.2)'}}>📷</button>
+        </div>
+        <div style=${{textAlign:'center'}}>
+          <div class="serif" style=${{fontSize:24,fontWeight:700,color:'#fff',marginBottom:2}}>${settings.name}</div>
+          <div style=${{fontSize:12,color:'rgba(255,255,255,.7)',fontWeight:600}}>Appuie sur la photo pour la changer</div>
+        </div>
+      </div>
     </div>
-    <div class="card" style=${{padding:'18px',marginBottom:16}}>
-      <h3 style=${{fontSize:14,fontWeight:700,color:'var(--muted)',marginBottom:4,textTransform:'uppercase',letterSpacing:'.08em'}}>IA — Clé Anthropic</h3>
-      <p style=${{fontSize:12,color:'var(--muted)',marginBottom:14,lineHeight:1.65}}>Pour utiliser Finella AI, obtiens ta clé sur <strong>console.anthropic.com</strong> → API Keys. Elle est stockée uniquement sur ton appareil.</p>
+
+    <div style=${{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:8,margin:'14px 0'}}>
+      ${[{l:'Dépenses',v:fmtAmt(totalExpense,cur),c:'var(--rose)'},{l:'Revenus',v:fmtAmt(totalIncome,cur),c:'var(--mint)'},{l:'Épargne',v:fmtAmt(totalSaved,cur),c:'var(--gold)'}].map(s=>html`<div key=${s.l} class="stat-pill">
+        <div style=${{fontSize:9.5,fontWeight:800,color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.08em'}}>${s.l}</div>
+        <div class="serif" style=${{fontSize:14,fontWeight:700,color:s.c,lineHeight:1.2}}>${s.v}</div>
+      </div>`)}
+    </div>
+
+    <div class="card" style=${{padding:'16px 18px',marginBottom:12}}>
+      <h3 style=${{fontSize:12,fontWeight:800,color:'var(--muted)',marginBottom:14,textTransform:'uppercase',letterSpacing:'.08em'}}>Mon profil</h3>
+      <${FInput} label="Prénom" value=${name} onChange=${setName} placeholder="Ton prénom"/>
+      <${FSelect} label="Devise" value=${cur} onChange=${setCur} options=${CURRENCIES.map(c=>({v:c.s,l:c.l}))}/>
+      <button class="btn btn-rose btn-sm" style=${{width:'100%'}} onClick=${()=>onSaveSettings({name,currency:cur,apiKey})}>Enregistrer ✓</button>
+    </div>
+
+    <div class="card" style=${{padding:'16px 18px',marginBottom:12}}>
+      <h3 style=${{fontSize:12,fontWeight:800,color:'var(--muted)',marginBottom:4,textTransform:'uppercase',letterSpacing:'.08em'}}>Finella AI — Clé Anthropic</h3>
+      <p style=${{fontSize:12,color:'var(--muted)',marginBottom:13,lineHeight:1.65,fontWeight:600}}>Obtiens ta clé sur <strong style=${{color:'var(--violet)'}}>console.anthropic.com</strong> → API Keys. Stockée uniquement sur cet appareil.</p>
       <div class="inp-wrap">
         <label class="lbl">Clé API</label>
         <div style=${{position:'relative'}}>
           <input class="inp" type=${showKey?'text':'password'} value=${apiKey} onInput=${e=>setApiKey(e.target.value)} placeholder="sk-ant-…"/>
-          <button onClick=${()=>setShowKey(v=>!v)} style=${{position:'absolute',right:12,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize:18}}>${showKey?'🙈':'👁️'}</button>
+          <button onClick=${()=>setShowKey(v=>!v)} style=${{position:'absolute',right:12,top:'50%',transform:'translateY(-50%)',background:'none',border:'none',cursor:'pointer',fontSize:18,lineHeight:1}}>${showKey?'🙈':'👁️'}</button>
         </div>
       </div>
-      <button class="btn btn-rose btn-sm" style=${{width:'100%'}} onClick=${()=>onSave({name,currency:cur,apiKey})}>Enregistrer la clé</button>
+      <button class="btn btn-rose btn-sm" style=${{width:'100%'}} onClick=${()=>onSaveSettings({name,currency:cur,apiKey})}>Enregistrer la clé ✓</button>
     </div>
-    <div class="card" style=${{padding:'18px'}}>
-      <h3 style=${{fontSize:14,fontWeight:700,color:'#E53935',marginBottom:12,textTransform:'uppercase',letterSpacing:'.08em'}}>Zone danger 🚨</h3>
-      <button class="btn btn-danger" style=${{width:'100%'}} onClick=${()=>{if(confirm('Supprimer TOUTES les données ? Cette action est irréversible.'))onClear();}}>Réinitialiser toutes les données</button>
+
+    <div class="card" style=${{padding:'16px 18px',marginBottom:12}}>
+      <h3 style=${{fontSize:12,fontWeight:800,color:'var(--muted)',marginBottom:12,textTransform:'uppercase',letterSpacing:'.08em'}}>Statistiques</h3>
+      <div style=${{display:'flex',flexDirection:'column',gap:8}}>
+        ${[{l:'Total transactions',v:txs.length},{l:'Objectifs d\'épargne',v:savings.length},{l:'Wishlist',v:wishlist.length},{l:'Objectifs atteints',v:savings.filter(g=>g.current>=g.target).length}].map(s=>html`<div key=${s.l} style=${{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'8px 0',borderBottom:'1px solid var(--border)'}}>
+          <span style=${{fontSize:13,fontWeight:700,color:'var(--muted)'}}>${s.l}</span>
+          <span class="serif" style=${{fontSize:16,fontWeight:700,color:'var(--text)'}}>${s.v}</span>
+        </div>`)}
+      </div>
+    </div>
+
+    <div class="card" style=${{padding:'16px 18px'}}>
+      <h3 style=${{fontSize:12,fontWeight:800,color:'#C81A5E',marginBottom:12,textTransform:'uppercase',letterSpacing:'.08em'}}>Zone danger 🚨</h3>
+      <button class="btn btn-danger" style=${{width:'100%',fontSize:14}} onClick=${()=>{if(confirm('Supprimer TOUTES les données ? Action irréversible.'))onClear();}}>Réinitialiser toutes les données</button>
     </div>
     <div style=${{height:16}}/>
   </div>`;
 };
 
-//
 function App(){
   const [settings,setSettings]=useState(()=>LS.get('fin-settings',null));
   const [txs,setTxs]=useState(()=>LS.get('fin-txs',[]));
   const [budgets,setBudgets]=useState(()=>LS.get('fin-budgets',{}));
   const [savings,setSavings]=useState(()=>LS.get('fin-savings',[]));
+  const [wishlist,setWishlist]=useState(()=>LS.get('fin-wish',[]));
+  const [photo,setPhoto]=useState(()=>LS.get('fin-photo',null));
   const [page,setPage]=useState('home');
   const [addOpen,setAddOpen]=useState(false);
   const [editTx,setEditTx]=useState(null);
   const [animKey,setAnimKey]=useState(0);
 
   const cur=settings?.currency||'€';
-  window._finCur=cur;
+  window._fCur=cur;
 
   useEffect(()=>{LS.set('fin-txs',txs)},[txs]);
   useEffect(()=>{LS.set('fin-budgets',budgets)},[budgets]);
   useEffect(()=>{LS.set('fin-savings',savings)},[savings]);
+  useEffect(()=>{LS.set('fin-wish',wishlist)},[wishlist]);
   useEffect(()=>{LS.set('fin-settings',settings)},[settings]);
+  useEffect(()=>{if(photo)LS.set('fin-photo',photo)},[photo]);
 
   const navTo=p=>{setPage(p);setAnimKey(k=>k+1)};
+  if(!settings)return html`<${Onboarding} onDone=${s=>setSettings(s)}/>`;
 
-  if(!settings) return html`<${Onboarding} onDone=${s=>setSettings(s)}/>`;
-
-  const saveTx=t=>{
-    setTxs(prev=>{
-      const i=prev.findIndex(x=>x.id===t.id);
-      return i>=0?prev.map(x=>x.id===t.id?t:x):[...prev,t];
-    });
-    setEditTx(null);
-  };
+  const saveTx=t=>{setTxs(prev=>{const i=prev.findIndex(x=>x.id===t.id);return i>=0?prev.map(x=>x.id===t.id?t:x):[...prev,t]});setEditTx(null);};
   const delTx=id=>setTxs(prev=>prev.filter(t=>t.id!==id));
-  const saveBudget=(k,v)=>setBudgets(p=>{const n={...p};if(v===0)delete n[k];else n[k]=v;return n});
+  const saveBudget=(k,v)=>setBudgets(p=>{const n={...p};if(!v)delete n[k];else n[k]=v;return n});
   const saveGoal=g=>setSavings(prev=>{const i=prev.findIndex(x=>x.id===g.id);return i>=0?prev.map(x=>x.id===g.id?g:x):[...prev,g]});
   const delGoal=id=>setSavings(prev=>prev.filter(g=>g.id!==id));
   const addContrib=(id,amt)=>setSavings(prev=>prev.map(g=>g.id===id?{...g,current:Math.min(g.current+amt,g.target)}:g));
-  const clearAll=()=>{setTxs([]);setBudgets({});setSavings([]);LS.set('fin-chat',[]);setSettings(s=>({...s}))};
+  const saveWish=w=>setWishlist(prev=>{const i=prev.findIndex(x=>x.id===w.id);return i>=0?prev.map(x=>x.id===w.id?w:x):[...prev,w]});
+  const delWish=id=>setWishlist(prev=>prev.filter(w=>w.id!==id));
+  const toggleWish=id=>setWishlist(prev=>prev.map(w=>w.id===id?{...w,done:!w.done}:w));
+  const clearAll=()=>{setTxs([]);setBudgets({});setSavings([]);setWishlist([]);setPhoto(null);LS.set('fin-chat',[]);};
 
   const NAV=[
     {id:'home',icon:'🏠',label:'Accueil'},
     {id:'txs',icon:'💳',label:'Dépenses'},
     {id:'budget',icon:'📊',label:'Budget'},
-    {id:'savings',icon:'🐷',label:'Épargne'},
-    {id:'chat',icon:'💬',label:'IA'},
+    {id:'savings',icon:'💎',label:'Épargne'},
+    {id:'chat',icon:'💬',label:'Finella IA'},
   ];
 
-  return html`<div id="app" style=${{display:'flex',flexDirection:'column',height:'100vh',overflow:'hidden',position:'relative'}}>
-    
-    ${page!=='chat'&&html`<div style=${{paddingTop:'var(--safe-top)',background:'var(--bg)',flexShrink:0}}>
-      <div style=${{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'14px 18px 4px'}}>
-        <div style=${{fontSize:16,fontFamily:"'Playfair Display',serif",fontWeight:700,color:'var(--text)'}}>
+  return html`<div style=${{display:'flex',flexDirection:'column',height:'100vh',overflow:'hidden',fontFamily:"'Nunito',-apple-system,sans-serif",background:'var(--bg)'}}>
+
+    ${page!=='chat'&&page!=='profile'&&html`<div style=${{paddingTop:'var(--safe-top)',flexShrink:0,background:'var(--bg)'}}>
+      <div style=${{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'12px 18px 6px'}}>
+        <div class="serif" style=${{fontSize:22,fontWeight:700,color:'var(--text)',letterSpacing:'-.01em'}}>
           Finella <span style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 5s ease infinite',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>💖</span>
         </div>
-        <button onClick=${()=>navTo('settings')} style=${{background:'none',border:'none',cursor:'pointer',fontSize:22,WebkitTapHighlightColor:'transparent',padding:'4px'}}>
-          ${page==='settings'?'✕':'⚙️'}
-        </button>
+        <${ProfileAvatar} photo=${photo} name=${settings.name} size=${38} onClick=${()=>navTo('profile')}/>
       </div>
     </div>`}
-    
-    <div class=${`screen ${page==='chat'?'no-nav':''}`} style=${{flex:1}}>
+
+    <div class=${`screen ${page==='chat'||page==='profile'?'no-nav':''}`} style=${{flex:1}}>
       <div key=${animKey} class="fu">
-        ${page==='home'&&html`<${HomePage} txs=${txs} savings=${savings} name=${settings.name} cur=${cur} onAdd=${()=>setAddOpen(true)}/>`}
+        ${page==='home'&&html`<${HomePage} txs=${txs} savings=${savings} name=${settings.name} cur=${cur} photo=${photo} onAdd=${()=>setAddOpen(true)} navTo=${navTo}/>`}
         ${page==='txs'&&html`<${TxPage} txs=${txs} cur=${cur} onEdit=${t=>{setEditTx(t);setAddOpen(true);}} onDelete=${delTx}/>`}
         ${page==='budget'&&html`<${BudgetPage} txs=${txs} budgets=${budgets} cur=${cur} onSaveBudget=${saveBudget}/>`}
-        ${page==='savings'&&html`<${SavingsPage} savings=${savings} cur=${cur} onSave=${saveGoal} onDelete=${delGoal} onContrib=${addContrib}/>`}
+        ${page==='savings'&&html`<${SavingsPage} savings=${savings} cur=${cur} wishlist=${wishlist} onSaveGoal=${saveGoal} onDeleteGoal=${delGoal} onContrib=${addContrib} onSaveWish=${saveWish} onDeleteWish=${delWish} onToggleWish=${toggleWish}/>`}
         ${page==='chat'&&html`<${ChatPage} txs=${txs} savings=${savings} budgets=${budgets} cur=${cur} apiKey=${settings.apiKey} name=${settings.name}/>`}
-        ${page==='settings'&&html`<${SettingsPage} settings=${settings} onSave=${s=>{setSettings(prev=>({...prev,...s}));navTo('home');}} onClear=${clearAll}/>`}
+        ${page==='profile'&&html`<${ProfilePage} settings=${settings} photo=${photo} txs=${txs} savings=${savings} wishlist=${wishlist} onSaveSettings=${s=>{setSettings(prev=>({...prev,...s}));navTo('home');}} onPhotoChange=${setPhoto} onClear=${clearAll} navTo=${navTo}/>`}
       </div>
     </div>
-    
-    ${page!=='chat'&&page!=='settings'&&html`<nav class="bot-nav">
+
+    <nav class="bot-nav">
       ${NAV.map(n=>html`<button key=${n.id} class=${`nav-btn ${page===n.id?'active':''}`} onClick=${()=>navTo(n.id)}>
-        <span class="nav-icon">${n.icon}</span>
-        <span class="nav-label">${n.label}</span>
+        <span class="nicon">${n.icon}</span>
+        <span class="nlabel">${n.label}</span>
       </button>`)}
-    </nav>`}
-    ${page==='chat'&&html`<nav class="bot-nav">
-      ${NAV.map(n=>html`<button key=${n.id} class=${`nav-btn ${page===n.id?'active':''}`} onClick=${()=>navTo(n.id)}>
-        <span class="nav-icon">${n.icon}</span>
-        <span class="nav-label">${n.label}</span>
-      </button>`)}
-    </nav>`}
-    
+      <button class=${`nav-btn ${page==='profile'?'active':''}`} onClick=${()=>navTo('profile')}>
+        <span class="nicon" style=${{overflow:'hidden',borderRadius:'50%',width:24,height:24,display:'flex',alignItems:'center',justifyContent:'center'}}>
+          ${photo?html`<img src=${photo} style=${{width:24,height:24,objectFit:'cover',borderRadius:'50%'}}/>`:html`<span style=${{fontSize:20}}>👩</span>`}
+        </span>
+        <span class="nlabel">Profil</span>
+      </button>
+    </nav>
+
     ${['home','txs','budget'].includes(page)&&html`<button class="fab" onClick=${()=>{setEditTx(null);setAddOpen(true);}}>＋</button>`}
-    
     ${(addOpen||editTx)&&html`<${TxForm} onClose=${()=>{setAddOpen(false);setEditTx(null);}} onSave=${saveTx} initial=${editTx}/>`}
   </div>`;
 }
@@ -933,3 +942,4 @@ if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serv
 </script>
 </body>
 </html>
+
