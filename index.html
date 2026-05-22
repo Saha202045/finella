@@ -66,7 +66,7 @@
     .glass{background:rgba(255,255,255,.18);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.3)}
 
     /* ─── BUTTONS ─── */
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:18px;font-size:15px;font-weight:700;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent;font-family:inherit}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 28px;border-radius:18px;font-size:15px;font-weight:700;cursor:pointer;border:none;transition:transform .15s,box-shadow .15s;webkitTapHighlightColor:transparent;font-family:inherit}
     .btn:active{transform:scale(.95)}
     .btn-rose{background:var(--hero);background-size:200% 200%;animation:gradShift 5s ease infinite;color:#fff;box-shadow:0 8px 28px var(--rose-glow)}
     .btn-ghost{background:rgba(155,93,229,.08);color:var(--muted);border:1.5px solid var(--border)}
@@ -81,7 +81,7 @@
 
     /* ─── BOTTOM NAV ─── */
     .bot-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid rgba(155,93,229,.1);display:flex;align-items:stretch;padding-bottom:var(--safe-bottom);z-index:100;box-shadow:0 -4px 24px rgba(155,93,229,.1)}
-    .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 0 8px;background:none;border:none;cursor:pointer;-webkit-tap-highlight-color:transparent;position:relative;transition:color .2s;font-family:inherit}
+    .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:10px 0 8px;background:none;border:none;cursor:pointer;webkitTapHighlightColor:transparent;position:relative;transition:color .2s;font-family:inherit}
     .nav-btn .nav-icon{font-size:22px;line-height:1;transition:transform .2s}
     .nav-btn .nav-label{font-size:10px;font-weight:700;letter-spacing:.03em;color:var(--light);transition:color .2s}
     .nav-btn.active .nav-label{color:var(--rose)}
@@ -90,7 +90,7 @@
     .nav-btn.active::after{width:32px}
 
     /* ─── FAB ─── */
-    .fab{position:fixed;bottom:calc(var(--safe-bottom) + 78px);right:20px;width:60px;height:60px;border-radius:50%;background:var(--hero);background-size:200% 200%;animation:gradShift 5s ease infinite,pulse 2.5s ease-in-out infinite;color:#fff;border:none;font-size:28px;cursor:pointer;z-index:101;box-shadow:0 8px 28px var(--rose-glow);-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;transition:transform .15s}
+    .fab{position:fixed;bottom:calc(var(--safe-bottom) + 78px);right:20px;width:60px;height:60px;border-radius:50%;background:var(--hero);background-size:200% 200%;animation:gradShift 5s ease infinite,pulse 2.5s ease-in-out infinite;color:#fff;border:none;font-size:28px;cursor:pointer;z-index:101;box-shadow:0 8px 28px var(--rose-glow);webkitTapHighlightColor:transparent;display:flex;align-items:center;justify-content:center;transition:transform .15s}
     .fab:active{transform:scale(.9)}
 
     /* ─── MODAL ─── */
@@ -115,7 +115,7 @@
     .prog-fill{height:100%;border-radius:50px;transition:width .8s cubic-bezier(.23,1,.32,1)}
 
     /* ─── CHIP ─── */
-    .chip{padding:7px 14px;border-radius:50px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid var(--border);background:transparent;color:var(--muted);-webkit-tap-highlight-color:transparent;white-space:nowrap;font-family:inherit;transition:all .2s}
+    .chip{padding:7px 14px;border-radius:50px;font-size:12px;font-weight:700;cursor:pointer;border:2px solid var(--border);background:transparent;color:var(--muted);webkitTapHighlightColor:transparent;white-space:nowrap;font-family:inherit;transition:all .2s}
     .chip.active{border-color:var(--rose);background:var(--rose-light);color:var(--rose)}
 
     /* ─── ONBOARDING ─── */
@@ -131,7 +131,7 @@
     .typing-dot:nth-child(3){animation-delay:.4s}
 
     /* ─── MISC ─── */
-    .tx-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--border);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:opacity .15s}
+    .tx-row{display:flex;align-items:center;gap:13px;padding:13px 0;border-bottom:1px solid var(--border);cursor:pointer;webkitTapHighlightColor:transparent;transition:opacity .15s}
     .tx-row:last-child{border-bottom:none}
     .tx-row:active{opacity:.7}
     .section-title{font-size:19px;font-weight:700;color:var(--text);margin-bottom:14px;font-family:'Playfair Display',serif}
@@ -155,9 +155,7 @@ import{useState,useEffect,useCallback,useRef,useMemo}from'https://esm.sh/preact@
 import htm from'https://esm.sh/htm@3.1.1';
 const html=htm.bind(h);
 
-/* ═══════════════════════════════════════════
-   CONSTANTS
-═══════════════════════════════════════════ */
+//
 const CATS=[
   {k:'shopping',   l:'Shopping',     e:'🛍️', c:'#FF1F6E', bg:'#FFE0EC', g:'linear-gradient(135deg,#FF1F6E,#FF8C6B)', t:'expense'},
   {k:'courses',    l:'Courses',      e:'🛒', c:'#00B894', bg:'#CCFAF2', g:'linear-gradient(135deg,#00D9A6,#4FACFE)', t:'expense'},
@@ -188,17 +186,13 @@ const monthKey=d=>new Date(d).toLocaleDateString('fr-FR',{month:'long',year:'num
 const thisMonth=()=>{const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,'0')}`};
 const isThisMonth=d=>d.startsWith(thisMonth());
 
-/* ═══════════════════════════════════════════
-   STORAGE
-═══════════════════════════════════════════ */
+//
 const LS={
   get:(k,def)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):def}catch{return def}},
   set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}},
 };
 
-/* ═══════════════════════════════════════════
-   SMALL COMPONENTS
-═══════════════════════════════════════════ */
+//
 const Loader=()=>html`<div style=${{display:'flex',alignItems:'center',justifyContent:'center',height:'100%'}}>
   <div style=${{width:44,height:44,borderRadius:'50%',border:'4px solid #F0E8FF',borderTopColor:'var(--rose)',animation:'spin .7s linear infinite'}}/>
 </div>`;
@@ -238,9 +232,7 @@ const Sheet=({title,onClose,children,action,actionLabel='Enregistrer',actionGrad
     </div>
   </div>`;
 
-/* ═══════════════════════════════════════════
-   DONUT CHART
-═══════════════════════════════════════════ */
+//
 const DonutChart=({data,size=160})=>{
   const total=data.reduce((s,d)=>s+d.value,0);
   if(!total)return html`<div style=${{width:size,height:size,borderRadius:'50%',background:'#F0E8FF',display:'flex',alignItems:'center',justifyContent:'center',fontSize:13,color:'var(--muted)',fontWeight:600}}>Vide</div>`;
@@ -261,9 +253,7 @@ const DonutChart=({data,size=160})=>{
   </div>`;
 };
 
-/* ═══════════════════════════════════════════
-   SAVINGS RING
-═══════════════════════════════════════════ */
+//
 const SavingsRing=({pct,color,size=72})=>{
   const R=28,circ=2*Math.PI*R,filled=Math.min(pct,100)/100*circ;
   return html`<svg class="savings-ring" width=${size} height=${size} viewBox="0 0 72 72">
@@ -274,23 +264,19 @@ const SavingsRing=({pct,color,size=72})=>{
   </svg>`;
 };
 
-/* ═══════════════════════════════════════════
-   CATEGORY GRID PICKER
-═══════════════════════════════════════════ */
+//
 const CatPicker=({value,onChange,type})=>{
   const cats=CATS.filter(c=>c.t===type);
   return html`<div style=${{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:8}}>
     ${cats.map(c=>html`<button key=${c.k} onClick=${()=>onChange(c.k)}
-      style=${{background:value===c.k?c.g:c.bg,borderRadius:14,border:value===c.k?`2.5px solid ${c.c}`:'2.5px solid transparent',padding:'10px 4px',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:4,transition:'all .18s',boxShadow:value===c.k?`0 4px 16px ${c.c}44`:'none',-WebkitTapHighlightColor:'transparent'}}>
+      style=${{background:value===c.k?c.g:c.bg,borderRadius:14,border:value===c.k?`2.5px solid ${c.c}`:'2.5px solid transparent',padding:'10px 4px',cursor:'pointer',display:'flex',flexDirection:'column',alignItems:'center',gap:4,transition:'all .18s',boxShadow:value===c.k?`0 4px 16px ${c.c}44`:'none',WebkitTapHighlightColor:'transparent'}}>
       <span style=${{fontSize:22,lineHeight:1}}>${c.e}</span>
       <span style=${{fontSize:9,fontWeight:700,color:value===c.k?'#fff':c.c,lineHeight:1.2,textAlign:'center',letterSpacing:'.02em'}}>${c.l}</span>
     </button>`)}
   </div>`;
 };
 
-/* ═══════════════════════════════════════════
-   TRANSACTION FORM
-═══════════════════════════════════════════ */
+//
 const TxForm=({onClose,onSave,initial})=>{
   const [type,setType]=useState(initial?.type||'expense');
   const [amount,setAmount]=useState(initial?.amount?String(initial.amount):'');
@@ -332,9 +318,7 @@ const TxForm=({onClose,onSave,initial})=>{
   </${Sheet}>`;
 };
 
-/* ═══════════════════════════════════════════
-   ONBOARDING
-═══════════════════════════════════════════ */
+//
 const Onboarding=({onDone})=>{
   const [step,setStep]=useState(0);
   const [name,setName]=useState('');
@@ -380,9 +364,7 @@ const Onboarding=({onDone})=>{
   </div>`;
 };
 
-/* ═══════════════════════════════════════════
-   HOME PAGE
-═══════════════════════════════════════════ */
+//
 const HomePage=({txs,savings,name,cur,onAdd})=>{
   const monthTxs=txs.filter(t=>isThisMonth(t.date));
   const income=monthTxs.filter(t=>t.type==='income').reduce((s,t)=>s+t.amount,0);
@@ -406,7 +388,7 @@ const HomePage=({txs,savings,name,cur,onAdd})=>{
   const greeting=now.getHours()<12?'Bonjour':now.getHours()<18?'Bonsoir':'Bonsoir';
 
   return html`<div class="p-screen">
-    <!-- HERO -->
+    
     <div class="fu card" style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',padding:'22px 22px 28px',marginBottom:16,border:'none',boxShadow:'0 12px 36px var(--rose-glow)',position:'relative',overflow:'hidden'}}>
       <div style=${{position:'absolute',top:-40,right:-40,width:160,height:160,borderRadius:'50%',background:'rgba(255,255,255,.07)'}}/>
       <div style=${{position:'absolute',bottom:-30,left:30,width:100,height:100,borderRadius:'50%',background:'rgba(255,255,255,.05)'}}/>
@@ -428,7 +410,7 @@ const HomePage=({txs,savings,name,cur,onAdd})=>{
       </div>
     </div>
 
-    <!-- QUICK STATS ROW -->
+    
     <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:16}}>
       <div class="fu card" style=${{padding:'15px 16px',animationDelay:'80ms'}}>
         <div style=${{fontSize:10,fontWeight:700,color:'var(--muted)',textTransform:'uppercase',letterSpacing:'.08em',marginBottom:6}}>Épargne totale</div>
@@ -442,7 +424,7 @@ const HomePage=({txs,savings,name,cur,onAdd})=>{
       </div>
     </div>
 
-    <!-- DONUT + LEGEND -->
+    
     ${catData.length>0&&html`<div class="fu card" style=${{padding:'18px 18px 16px',marginBottom:16,animationDelay:'140ms'}}>
       <h3 class="section-title" style=${{fontSize:16,marginBottom:14}}>Mes dépenses 🍩</h3>
       <div style=${{display:'flex',alignItems:'center',gap:16}}>
@@ -457,7 +439,7 @@ const HomePage=({txs,savings,name,cur,onAdd})=>{
       </div>
     </div>`}
 
-    <!-- MONTHLY TREND -->
+    
     ${months.some(m=>m.total>0)&&html`<div class="fu card" style=${{padding:'18px 18px 16px',marginBottom:16,animationDelay:'200ms'}}>
       <h3 class="section-title" style=${{fontSize:16,marginBottom:16}}>Tendance 6 mois 📊</h3>
       <div style=${{display:'flex',alignItems:'flex-end',gap:8,height:80}}>
@@ -468,7 +450,7 @@ const HomePage=({txs,savings,name,cur,onAdd})=>{
       </div>
     </div>`}
 
-    <!-- RECENT TXS -->
+    
     <div class="fu" style=${{animationDelay:'240ms'}}>
       <div style=${{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:12}}>
         <h3 class="section-title" style=${{fontSize:16,margin:0}}>Récents ✨</h3>
@@ -498,9 +480,7 @@ const HomePage=({txs,savings,name,cur,onAdd})=>{
   </div>`;
 };
 
-/* ═══════════════════════════════════════════
-   TRANSACTIONS PAGE
-═══════════════════════════════════════════ */
+//
 const TxPage=({txs,cur,onEdit,onDelete})=>{
   const [filter,setFilter]=useState('all');
   const [catF,setCatF]=useState('all');
@@ -560,9 +540,7 @@ const TxPage=({txs,cur,onEdit,onDelete})=>{
   </div>`;
 };
 
-/* ═══════════════════════════════════════════
-   BUDGET PAGE
-═══════════════════════════════════════════ */
+//
 const BudgetPage=({txs,budgets,cur,onSaveBudget})=>{
   const [editCat,setEditCat]=useState(null);
   const [editAmt,setEditAmt]=useState('');
@@ -593,7 +571,7 @@ const BudgetPage=({txs,budgets,cur,onSaveBudget})=>{
         const budget=budgets[c.k]||0;
         const pct=budget>0?Math.min(spent/budget*100,100):0;
         const over=budget>0&&spent>budget;
-        return html`<div key=${c.k} class="card fu" style=${{padding:'14px 16px',cursor:'pointer',-WebkitTapHighlightColor:'transparent',animationDelay:`${CATS.indexOf(c)*30}ms`}}
+        return html`<div key=${c.k} class="card fu" style=${{padding:'14px 16px',cursor:'pointer',WebkitTapHighlightColor:'transparent',animationDelay:`${CATS.indexOf(c)*30}ms`}}
           onClick=${()=>{setEditCat(c.k);setEditAmt(budget?String(budget):'');}}>
           <div style=${{display:'flex',alignItems:'center',gap:12,marginBottom:budget?10:0}}>
             <div style=${{width:42,height:42,borderRadius:12,background:c.g,display:'flex',alignItems:'center',justifyContent:'center',fontSize:20,flexShrink:0,boxShadow:`0 4px 12px ${c.c}33`}}>
@@ -623,9 +601,7 @@ const BudgetPage=({txs,budgets,cur,onSaveBudget})=>{
   </div>`;
 };
 
-/* ═══════════════════════════════════════════
-   SAVINGS PAGE
-═══════════════════════════════════════════ */
+//
 const SavingsPage=({savings,cur,onSave,onDelete,onContrib})=>{
   const [addOpen,setAddOpen]=useState(false);
   const [editGoal,setEditGoal]=useState(null);
@@ -726,9 +702,7 @@ const SavingsPage=({savings,cur,onSave,onDelete,onContrib})=>{
   </div>`;
 };
 
-/* ═══════════════════════════════════════════
-   AI CHAT PAGE
-═══════════════════════════════════════════ */
+//
 const ChatPage=({txs,savings,budgets,cur,apiKey,name})=>{
   const [msgs,setMsgs]=useState(()=>LS.get('fin-chat',[]));
   const [input,setInput]=useState('');
@@ -785,7 +759,7 @@ Réponds toujours de façon personnalisée en utilisant ces données. Sois conci
   const SUGGESTIONS=['Analyse mes dépenses du mois 📊','Comment économiser davantage ? 💰','Où est-ce que je gaspille ? 🔍','Conseil pour atteindre mes objectifs ✨'];
 
   return html`<div style=${{display:'flex',flexDirection:'column',height:'100%',overflow:'hidden'}}>
-    <!-- HEADER -->
+    
     <div style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 6s ease infinite',padding:'calc(var(--safe-top) + 14px) 18px 16px',flexShrink:0,boxShadow:'0 4px 20px var(--rose-glow)'}}>
       <div style=${{display:'flex',alignItems:'center',gap:12}}>
         <div style=${{width:42,height:42,borderRadius:14,background:'rgba(255,255,255,.2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:22,backdropFilter:'blur(10px)'}}>💖</div>
@@ -796,14 +770,14 @@ Réponds toujours de façon personnalisée en utilisant ces données. Sois conci
         <button onClick=${()=>setMsgs([])} style=${{marginLeft:'auto',background:'rgba(255,255,255,.15)',border:'none',borderRadius:10,padding:'6px 12px',color:'#fff',cursor:'pointer',fontSize:12,fontWeight:700,fontFamily:'inherit'}}>Effacer</button>
       </div>
     </div>
-    <!-- MESSAGES -->
+    
     <div style=${{flex:1,overflowY:'auto',padding:'16px 16px 0',display:'flex',flexDirection:'column',gap:12}}>
       ${msgs.length===0&&html`<div style=${{textAlign:'center',padding:'20px 0 10px'}}>
         <div style=${{fontSize:52,marginBottom:8,animation:'float 3s ease-in-out infinite',display:'block'}}>🌸</div>
         <div style=${{fontSize:16,fontWeight:700,color:'var(--text)',marginBottom:4}}>Coucou ${name} ! 👋</div>
         <div style=${{fontSize:13,color:'var(--muted)',lineHeight:1.7,marginBottom:20}}>Je suis Finella, ton assistante financière IA.<br/>Pose-moi n'importe quelle question sur tes finances !</div>
         <div style=${{display:'flex',flexDirection:'column',gap:8}}>
-          ${SUGGESTIONS.map(s=>html`<button key=${s} onClick=${()=>{setInput(s);}} style=${{background:'var(--surface)',border:'1.5px solid var(--border)',borderRadius:14,padding:'11px 14px',cursor:'pointer',fontSize:13,fontWeight:600,color:'var(--violet)',textAlign:'left',fontFamily:'inherit',-WebkitTapHighlightColor:'transparent'}}>${s}</button>`)}
+          ${SUGGESTIONS.map(s=>html`<button key=${s} onClick=${()=>{setInput(s);}} style=${{background:'var(--surface)',border:'1.5px solid var(--border)',borderRadius:14,padding:'11px 14px',cursor:'pointer',fontSize:13,fontWeight:600,color:'var(--violet)',textAlign:'left',fontFamily:'inherit',WebkitTapHighlightColor:'transparent'}}>${s}</button>`)}
         </div>
       </div>`}
       ${msgs.map((m,i)=>html`<div key=${m.id||i} style=${{display:'flex',justifyContent:m.role==='user'?'flex-end':'flex-start',animationDelay:`${i*30}ms`}}>
@@ -820,21 +794,19 @@ Réponds toujours de façon personnalisée en utilisant ces données. Sois conci
       </div>`}
       <div ref=${endRef}/>
     </div>
-    <!-- INPUT -->
+    
     <div style=${{padding:'12px 16px',paddingBottom:`calc(var(--safe-bottom) + 100px)`,background:'var(--surface)',borderTop:'1px solid var(--border)',display:'flex',gap:10,flexShrink:0}}>
       <input class="inp" value=${input} onInput=${e=>setInput(e.target.value)}
         onKeyDown=${e=>e.key==='Enter'&&send()}
         placeholder="Parle à Finella…" style=${{flex:1,padding:'12px 16px',fontSize:14}}/>
-      <button onClick=${send} disabled=${loading||!input.trim()} class="btn btn-rose" style=${{padding:'12px 18px',borderRadius:14,fontSize:20,flexShrink:0,opacity:loading||!input.trim()?.5:1}}>
+      <button onClick=${send} disabled=${loading||!input.trim()} class="btn btn-rose" style=${{padding:'12px 18px',borderRadius:14,fontSize:20,flexShrink:0,opacity:(loading||!input.trim())?0.5:1}}>
         ${loading?html`<div style=${{width:20,height:20,borderRadius:'50%',border:'3px solid rgba(255,255,255,.3)',borderTopColor:'#fff',animation:'spin .7s linear infinite'}}/>`:html`→`}
       </button>
     </div>
   </div>`;
 };
 
-/* ═══════════════════════════════════════════
-   SETTINGS PAGE
-═══════════════════════════════════════════ */
+//
 const SettingsPage=({settings,onSave,onClear})=>{
   const [name,setName]=useState(settings.name);
   const [cur,setCur]=useState(settings.currency);
@@ -868,9 +840,7 @@ const SettingsPage=({settings,onSave,onClear})=>{
   </div>`;
 };
 
-/* ═══════════════════════════════════════════
-   MAIN APP
-═══════════════════════════════════════════ */
+//
 function App(){
   const [settings,setSettings]=useState(()=>LS.get('fin-settings',null));
   const [txs,setTxs]=useState(()=>LS.get('fin-txs',[]));
@@ -916,18 +886,18 @@ function App(){
   ];
 
   return html`<div id="app" style=${{display:'flex',flexDirection:'column',height:'100vh',overflow:'hidden',position:'relative'}}>
-    <!-- SETTINGS HEADER (non-chat pages) -->
+    
     ${page!=='chat'&&html`<div style=${{paddingTop:'var(--safe-top)',background:'var(--bg)',flexShrink:0}}>
       <div style=${{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'14px 18px 4px'}}>
         <div style=${{fontSize:16,fontFamily:"'Playfair Display',serif",fontWeight:700,color:'var(--text)'}}>
-          Finella <span style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 5s ease infinite',-WebkitBackgroundClip:'text',-WebkitTextFillColor:'transparent',backgroundClip:'text'}}>💖</span>
+          Finella <span style=${{background:'var(--hero)',backgroundSize:'200% 200%',animation:'gradShift 5s ease infinite',WebkitBackgroundClip:'text',WebkitTextFillColor:'transparent',backgroundClip:'text'}}>💖</span>
         </div>
-        <button onClick=${()=>navTo('settings')} style=${{background:'none',border:'none',cursor:'pointer',fontSize:22,-WebkitTapHighlightColor:'transparent',padding:'4px'}}>
+        <button onClick=${()=>navTo('settings')} style=${{background:'none',border:'none',cursor:'pointer',fontSize:22,WebkitTapHighlightColor:'transparent',padding:'4px'}}>
           ${page==='settings'?'✕':'⚙️'}
         </button>
       </div>
     </div>`}
-    <!-- PAGES -->
+    
     <div class=${`screen ${page==='chat'?'no-nav':''}`} style=${{flex:1}}>
       <div key=${animKey} class="fu">
         ${page==='home'&&html`<${HomePage} txs=${txs} savings=${savings} name=${settings.name} cur=${cur} onAdd=${()=>setAddOpen(true)}/>`}
@@ -938,7 +908,7 @@ function App(){
         ${page==='settings'&&html`<${SettingsPage} settings=${settings} onSave=${s=>{setSettings(prev=>({...prev,...s}));navTo('home');}} onClear=${clearAll}/>`}
       </div>
     </div>
-    <!-- BOTTOM NAV -->
+    
     ${page!=='chat'&&page!=='settings'&&html`<nav class="bot-nav">
       ${NAV.map(n=>html`<button key=${n.id} class=${`nav-btn ${page===n.id?'active':''}`} onClick=${()=>navTo(n.id)}>
         <span class="nav-icon">${n.icon}</span>
@@ -951,9 +921,9 @@ function App(){
         <span class="nav-label">${n.label}</span>
       </button>`)}
     </nav>`}
-    <!-- FAB -->
+    
     ${['home','txs','budget'].includes(page)&&html`<button class="fab" onClick=${()=>{setEditTx(null);setAddOpen(true);}}>＋</button>`}
-    <!-- MODALS -->
+    
     ${(addOpen||editTx)&&html`<${TxForm} onClose=${()=>{setAddOpen(false);setEditTx(null);}} onSave=${saveTx} initial=${editTx}/>`}
   </div>`;
 }
